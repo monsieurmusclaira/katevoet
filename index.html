@@ -52,7 +52,16 @@
       crossorigin="anonymous"
     ></script>
     <script src="js/jquery.swipebox.js"></script>
-    <script src="js/jquery.pagepiling.js"></script>
+   <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-136038137-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-136038137-1');
+</script>
+
 
     <!-- End of html head -->
   </head>
@@ -62,11 +71,15 @@
     <div id="pagepiling">
       <!-- Start of Section 1 -->
       <div class="section" id="section1">
-        <div class="video-container container-fluid">
+        <div class="logo container-fluid p-5 mt-5">
           <a class="swipebox" rel="vimeo" href="https://www.vimeo.com/206725218">
-            <img class="w-100 hvr-grow fade-in one" src="img/katevoetlogotrans.png">
+            <img class="w-100 hvr-grow" src="img/katevoetlogotrans.png">
           </img>
           </a>
+        </div>
+        <div class="container-fluid fade-in one my-2 text-center">
+          <h1 class="text-dark">Kate Voet</h1>
+          <h2 class="text-dark">director & screenwriter</h2>
         </div>
         <div class="container-fluid d-lg-none fade-in three my-5 text-center">
           <a class="swipebox" href="https://vimeo.com/256040751">
@@ -79,16 +92,7 @@
     <!-- End of  movie list - supreme-container  -->
     <!-- End of section wrapper supreme container -->
     <!-- Start of scripts -->
-    <script type="text/javascript">
-      $(document).ready(function() {
-        $("#pagepiling").pagepiling({
-          menu: null,
-          scrollingSpeed: 0,
-          verticalCentered: true,
-          loopBottom: true
-        });
-      });
-    </script>
+
     <script type="text/javascript">
       (function($) {
         $(".swipebox").swipebox({
