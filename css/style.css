@@ -189,28 +189,31 @@ h6 {
 
 /* End of fade css*/
 
+
+img {
+  -webkit-filter: none;
+  -moz-filter: none;
+  filter: none;
+  -webkit-transition: all .6s ease;
+  transition: all .6s ease;
+}
+
+img:hover {
+  -webkit-filter: grayscale(20%);
+  -moz-filter: grayscale(20%);
+  filter: grayscale(20%);
+  filter: grayscale(20%);
+  
+}
+
 /* Start of button css*/
-.hvr-grow a {
-  color: #ccc;
-  text-decoration: none;
-  margin-left: 5px;
-  margin-right: 5px;
-  -o-transition: color 0.2s ease-out, background 1s ease-in;
-  -ms-transition: color 0.2s ease-out, background 1s ease-in;
-  -moz-transition: color 0.2s ease-out, background 1s ease-in;
-  -webkit-transition: color 0.2s ease-out, background 1s ease-in;
-  /* ...and now override with proper CSS property */
-  transition: color 0.2s ease-out, background 1s ease-in;
-}
-.hvr-grow a:hover {
-  color: #8393a7;
-}
+
 .hvr-grow {
   -webkit-transform: perspective(1px) translateZ(0);
   transform: perspective(1px) translateZ(0);
   box-shadow: 0 0 1px transparent;
-  -webkit-transition-duration: 0.3s;
-  transition-duration: 0.3s;
+  -webkit-transition-duration: 0.6s;
+  transition-duration: 0.6;
   -webkit-transition-property: transform;
   transition-property: transform;
 }
@@ -219,67 +222,11 @@ h6 {
 .hvr-grow:active {
   -webkit-transform: scale(1.02);
   transform: scale(1.02);
+  
 }
 
-.btn:active,
-.btn:focus {
-  outline: none !important;
-  box-shadow: none;
-}
-.btn-close {
-  font-size: 1.8em;
-  font-family: "Montserrat", Helvetica, Arial, sans-serif;
-  font-weight: 300;
-}
-.btn:focus,
-.btn:active {
-  outline: none !important;
-  box-shadow: none;
-}
-#scroll-btn a {
-  padding-top: 10em;
-}
-#scroll-btn a span {
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  margin-left: -12px;
-  border-left: 1px solid #fff;
-  border-left: 1px solid #fff;
-  border-bottom: 1px solid #fff;
-  -webkit-transform: rotate(-45deg);
-  transform: rotate(-45deg);
-  -webkit-animation: scroll-btn 1.5s infinite;
-  animation: scroll-btn 1.5s infinite;
-  box-sizing: border-box;
-}
-@-webkit-keyframes scroll-btn {
-  0% {
-    -webkit-transform: rotate(-45deg) translate(0, 0);
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    -webkit-transform: rotate(-45deg) translate(-20px, 20px);
-    opacity: 0;
-  }
-}
-@keyframes scroll-btn {
-  0% {
-    transform: rotate(-45deg) translate(0, 0);
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    transform: rotate(-45deg) translate(-20px, 20px);
-    opacity: 0;
-  }
-}
-/* End of button css */
+
+
 /* Start of video css */
 .logo {
   max-width: 500px;
