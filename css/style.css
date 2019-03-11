@@ -30,11 +30,13 @@ h1 {
   font-size: 1.602em;
   font-family: "Montserrat", Helvetica, Arial, sans-serif;
   font-weight: 300;
+  font-variant: small-caps;
 }
 h2 {
   font-size: 1.824em;
   font-family: "Montserrat", Helvetica, Arial, sans-serif;
   font-weight: 100; 
+  font-variant: small-caps;
 }
 h3 {
   font-size: 1.266em;
