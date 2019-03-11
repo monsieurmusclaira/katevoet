@@ -8,7 +8,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <title>Victor Maes - Cinematographer</title>
+    <title>Kate Voet - Director & Screenwriter</title>
     <meta
       name="description"
       content="The cinematography porfolio of Victor Maes"
@@ -51,9 +51,8 @@
       integrity="sha384-u/bQvRA/1bobcXlcEYpsEdFVK/vJs3+T+nXLsBYJthmdBuavHvAW6UsmqO2Gd/F9"
       crossorigin="anonymous"
     ></script>
-    <script src="js/jquery.pagepiling.js"></script>
     <script src="js/jquery.swipebox.js"></script>
-
+    <script src="js/jquery.pagepiling.js"></script>
 
     <!-- End of html head -->
   </head>
@@ -65,30 +64,8 @@
       <div class="section" id="section1">
         <div class="video-container container-fluid">
           <a class="swipebox" rel="vimeo" href="https://www.vimeo.com/206725218">
-            <video
-              autoplay
-              loop
-              muted
-              playsinline
-              preload="auto"
-              class="w-100 hvr-grow fade-in one embed-responsive embed-responsive-16by9"
-              poster="video/SeeThrough.jpg"
-            >
-              <!-- MP4 for Safari, IE9, iPhone, iPad, Android, and Windows Phone 7 -->
-              <source type="video/mp4" src="video/seethrough.mp4" />
-              <!-- WebM/VP8 for Firefox4, Opera, and Chrome -->
-              <source type="video/webm" src="video/seethrough.webm" />
-              <!-- Gif as backup -->
-              <img src="video/seethrough.gif" alt="gif heading" />
-              <!-- Image as a last resort -->
-              <img
-                src="video/seethrough.jpg"
-                width="320"
-                height="240"
-                title="No video playback capabilities"
-              />
-              Your browser does not support the video
-            </video>
+            <img class="w-100 hvr-grow fade-in one" src="img/katevoetlogotrans.png">
+          </img>
           </a>
         </div>
         <div class="container-fluid d-lg-none fade-in three my-5 text-center">
@@ -102,6 +79,16 @@
     <!-- End of  movie list - supreme-container  -->
     <!-- End of section wrapper supreme container -->
     <!-- Start of scripts -->
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("#pagepiling").pagepiling({
+          menu: null,
+          scrollingSpeed: 0,
+          verticalCentered: true,
+          loopBottom: true
+        });
+      });
+    </script>
     <script type="text/javascript">
       (function($) {
         $(".swipebox").swipebox({
