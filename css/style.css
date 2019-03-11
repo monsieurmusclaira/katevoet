@@ -85,22 +85,25 @@ h6 {
   }
 }
 /* End of init */
-/* Start of backgrounds */
-/* Backgrounds will cover all the section
-	* --------------------------------------- */
+
+/* Start of sections */
+.section {
+  height:100%;
+  position:absolute;
+  width:100%;
+}
   #section1 {
     background-size: cover;
-    height: 100%;
-    min-height: 100%;
   }
-  /* Defining each section background and styles
-    * --------------------------------------- */
+
   #section1 {
     background-image: url(../img/marblebg.jpg);
-    background-position: 35% center;
+    background-position: 0% center;
     padding: 0 0 0 0;
   }
-  /* End of backgrounds */
+
+
+  /* End of sections */
 
 /* Start of fade css*/
 /* make keyframes that tell the start state and the end state of our object */
