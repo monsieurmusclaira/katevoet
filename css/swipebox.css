@@ -278,10 +278,6 @@ html.swipebox-html.swipebox-touch {
 --------------------------*/
 #swipebox-overlay {
   background: #0d0d0d;
-  -webkit-transition-duration: 0.6s;
-  transition-duration: 0.6;
-  -webkit-transition-property: transform;
-  transition-property: transform;
 }
 
 #swipebox-bottom-bar,
