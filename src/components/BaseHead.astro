@@ -15,7 +15,7 @@ const siteUrl = Astro.site ?? new URL('https://katevoet.com');
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl);
 const ogImage = image
   ? new URL(image, siteUrl)
-  : new URL('/social.png', siteUrl);
+  : new URL('/social.jpg', siteUrl);
 
 const personSchema = {
   '@context': 'https://schema.org',
