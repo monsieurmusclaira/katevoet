@@ -1,12 +1,34 @@
 ---
+import { Image } from 'astro:assets';
 const { image, alt } = Astro.props;
+
+// Resolve image from src/assets — paths come in as "/img/..."
+const allImages = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/img/**/*.{png,jpg,jpeg,webp,avif,gif}'
+);
+const imageKey = `/src/assets${image}`;
+const imageImport = allImages[imageKey];
+const resolvedImage = imageImport ? (await imageImport()).default : null;
 ---
 <section class="overflow-hidden">
-    <img
+  {resolvedImage
+    ? <Image
+        src={resolvedImage}
+        alt={alt}
+        class="w-full h-auto"
+        widths={[600, 900, 1200, 1800]}
+        sizes="(min-width: 1280px) 1200px, 100vw"
+        loading="lazy"
+        decoding="async"
+        data-lightbox
+      />
+    : <img
         src={image}
         loading="lazy"
+        decoding="async"
         alt={alt}
         class="w-full h-auto"
         data-lightbox
-    />
+      />
+  }
 </section>

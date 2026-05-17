@@ -23,13 +23,21 @@ const { image, title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.prop
       <Footer />
       <Lightbox />
 
-      <script is:inline src="https://unpkg.com/aos@next/dist/aos.js"></script>
+      <!-- AOS loaded asynchronously — does not block rendering -->
       <script is:inline>
-        AOS.init({
-          easing: 'ease-out-cubic',
-          duration: 800,
-          once: true,
-        });
+        (function() {
+          var link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = 'https://unpkg.com/aos@next/dist/aos.css';
+          document.head.appendChild(link);
+
+          var script = document.createElement('script');
+          script.src = 'https://unpkg.com/aos@next/dist/aos.js';
+          script.onload = function() {
+            AOS.init({ easing: 'ease-out-cubic', duration: 800, once: true });
+          };
+          document.body.appendChild(script);
+        })();
       </script>
   </body>
 

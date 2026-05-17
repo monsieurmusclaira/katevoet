@@ -4,17 +4,17 @@
   <div class="px-8 md:px-16 lg:px-24 py-6 flex items-center justify-between">
     <!-- Logo -->
     <a href="/" class="group">
-      <span class="text-subtitle text-white group-hover:text-white/80 transition-colors duration-300 tracking-[0.2em]">
+      <span id="nav-logo" class="text-subtitle text-white group-hover:opacity-70 transition-colors duration-500 tracking-[0.2em]">
         Kate Voet
       </span>
     </a>
 
     <!-- Navigation -->
     <nav class="hidden md:flex items-center gap-10">
-      <a href="/" class="text-subtitle text-white/70 hover:text-white transition-colors duration-300 link-underline">
+      <a href="/" id="nav-work" class="text-subtitle text-white/70 hover:opacity-100 transition-colors duration-500 link-underline">
         Work
       </a>
-      <a href="/about/" class="text-subtitle text-white/70 hover:text-white transition-colors duration-300 link-underline">
+      <a href="/about/" id="nav-about" class="text-subtitle text-white/70 hover:opacity-100 transition-colors duration-500 link-underline">
         About
       </a>
     </nav>
@@ -37,28 +37,58 @@
 </header>
 
 <script>
-  const header = document.getElementById('site-header');
-  const mobileBtn = document.getElementById('mobile-menu-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
+  function initNav() {
+    const header = document.getElementById('site-header');
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const logo = document.getElementById('nav-logo');
+    const navWork = document.getElementById('nav-work');
+    const navAbout = document.getElementById('nav-about');
 
-  // Scroll behavior
-  let lastScroll = 0;
-  window.addEventListener('scroll', () => {
-    const currentScroll = window.scrollY;
-
-    if (currentScroll > 100) {
-      header.classList.add('bg-charcoal/90', 'backdrop-blur-md');
-      header.classList.remove('bg-transparent');
-    } else {
-      header.classList.remove('bg-charcoal/90', 'backdrop-blur-md');
-      header.classList.add('bg-transparent');
+    function setNavLight() {
+      logo.classList.replace('text-charcoal', 'text-white');
+      navWork.classList.replace('text-charcoal/70', 'text-white/70');
+      navAbout.classList.replace('text-charcoal/70', 'text-white/70');
+      mobileBtn.classList.replace('text-charcoal/80', 'text-white/80');
     }
 
-    lastScroll = currentScroll;
-  });
+    function setNavDark() {
+      logo.classList.replace('text-white', 'text-charcoal');
+      navWork.classList.replace('text-white/70', 'text-charcoal/70');
+      navAbout.classList.replace('text-white/70', 'text-charcoal/70');
+      mobileBtn.classList.replace('text-white/80', 'text-charcoal/80');
+    }
 
-  // Mobile menu toggle
-  mobileBtn?.addEventListener('click', () => {
-    mobileMenu.classList.toggle('hidden');
-  });
+    function updateNav() {
+      if (window.scrollY > window.innerHeight * 0.8) {
+        setNavDark();
+      } else {
+        setNavLight();
+      }
+    }
+
+    // Apply correct state immediately on every page load / navigation
+    updateNav();
+
+    // Scroll listener — throttled via requestAnimationFrame
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          updateNav();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+
+    // Mobile menu toggle
+    mobileBtn?.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  }
+
+  // Run on first load and after every Astro view-transition navigation
+  initNav();
+  document.addEventListener('astro:page-load', initNav);
 </script>

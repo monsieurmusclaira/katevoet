@@ -1,22 +1,29 @@
 ---
 layout: "../layouts/BaseLayout.astro"
+title: "About — Kate Voet"
+description: "Kate Voet is a Belgian film director and screenwriter from Brussels. Her VR film A Long Goodbye won the Venice Immersive Achievement Prize at the 82nd Venice Film Festival."
 ---
 import ContentPicture from '../components/ContentPicture.astro';
+import { Image } from 'astro:assets';
+import aboutHero from '../assets/img/thetearsofthings/stills/TTOT_20221008_1.19.1.png';
 export const meta = {
     title: 'About',
-    heroImage: '/img/thetearsofthings/stills/TTOT_20221008_1.19.1.png',
     imageAlt: 'Film still'
 };
 
 {/* Hero Section */}
 <section class="relative h-[70vh] w-full overflow-hidden">
   <div class="absolute inset-0 z-0">
-    <img
-      src={meta.heroImage}
+    <Image
+      src={aboutHero}
       alt={meta.imageAlt}
       class="w-full h-full object-cover"
       style="object-position: 50% 50%"
+      widths={[800, 1200, 1920]}
+      sizes="100vw"
       loading="eager"
+      fetchpriority="high"
+      decoding="sync"
     />
     <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/60"></div>
   </div>
@@ -45,18 +52,31 @@ export const meta = {
 
       {/* Right Column */}
       <div class="md:col-span-7">
-        <p class="text-body text-lg leading-relaxed mb-8">Kate Voet is a Belgian film director and screenwriter from Brussels. She studied English literature and linguistics, theater studies, and film directing at the University of Amsterdam, LUCA School of Arts in Brussels, and The New School in New York City. With her film projects in development, she participated in several workshops and markets such as Torino Film Lab, the Venice Gap Financing Market, and IDFA Doclab Forum.</p>
+        <p class="text-body text-lg leading-relaxed mb-8">Kate Voet is a Belgian film director and screenwriter from Brussels, having studied English literature and linguistics, theater studies and film directing at the University of Amsterdam, LUCA School of Arts in Brussels and The New School in New York City. With her film projects in development, she participated in several workshops and markets such as Torino Film Lab, the Venice Gap Financing Market and IDFA Doclab Forum.</p>
 
-        <p class="text-body leading-relaxed mb-8">After her short films <em class="font-normal not-italic text-charcoal">Les Homards Immortels</em> and <em class="font-normal not-italic text-charcoal">The Tears of Things</em> toured festivals around the world, she wrote and directed <em class="font-normal not-italic text-charcoal">A Long Goodbye</em> together with Victor Maes — an interactive VR film which lets you step into the shoes of Ida, a 72-year-old pianist living with dementia.</p>
-
-        <p class="text-body leading-relaxed mb-8"><em class="font-normal not-italic text-charcoal">A Long Goodbye</em> had its world premiere in competition at the 82nd Venice Film Festival, where the film was awarded a prestigious lion (Venice Immersive Achievement Prize). The film went on to screen at Film Fest Gent, Thessaloniki Film Festival, IDFA, FIPADOC, Clermont-Ferrand, and SXSW, winning several more awards including Best XR Film at Clermont-Ferrand and the Agog Impact Award at SXSW. <em class="font-normal not-italic text-charcoal">A Long Goodbye</em> will continue to travel around the world in 2026.</p>
-
-        <p class="text-body leading-relaxed mb-12">She is now working on various projects in development, among which two fiction feature films.</p>
+        <p class="text-body leading-relaxed mb-12">After her short films <em class="font-normal not-italic text-charcoal">Les Homards Immortels</em> and <em class="font-normal not-italic text-charcoal">The Tears of Things</em> toured festivals around the world, she wrote and directed <em class="font-normal not-italic text-charcoal">A Long Goodbye</em> together with Victor Maes — an interactive VR film which lets you step into the shoes of Ida, a 72-year-old pianist living with dementia. <em class="font-normal not-italic text-charcoal">A Long Goodbye</em> had its world premiere in competition at the 82nd Venice Film Festival, where the film was awarded a prestigious lion (Venice Immersive Achievement Prize). <em class="font-normal not-italic text-charcoal">A Long Goodbye</em> went on to screen at Film Fest Gent, Thessaloniki Film Festival, IDFA, FIPADOC, Clermont Ferrand, and SXSW, winning several more awards such as Best XR Film at Clermont Ferrand and the Agog impact award at SXSW. <em class="font-normal not-italic text-charcoal">A Long Goodbye</em> will continue to travel around the world in 2026. She is now working on various projects in development, among which two fiction feature films.</p>
 
         {/* Contact */}
         <div class="pt-12 border-t border-warmborder">
           <p class="text-caption text-warmgray mb-6">Get in touch</p>
-          <a href="mailto:hello@katevoet.com" class="text-body text-charcoal hover:text-slateblue transition-colors duration-300 link-underline">hello@katevoet.com</a>
+          <a href="mailto:hi@katevoet.com" class="text-body text-charcoal hover:text-slateblue transition-colors duration-300 link-underline">hi@katevoet.com</a>
+        </div>
+
+        {/* Representation */}
+        <div class="pt-10 mt-10 border-t border-warmborder">
+          <p class="text-caption text-warmgray mb-6">Representation</p>
+          <p class="text-body text-charcoal mb-1">Pim van Breemen</p>
+          <p class="text-caption text-warmgray mb-3">Talent Manager — <a href="https://hennemanagency.nl/talent/kate-voet/" target="_blank" rel="noopener noreferrer" class="hover:text-slateblue transition-colors duration-300 link-underline">Henneman Agency</a></p>
+          <a href="mailto:pim@hennemanagency.nl" class="text-body text-charcoal hover:text-slateblue transition-colors duration-300 link-underline">pim@hennemanagency.nl</a>
+        </div>
+
+        {/* Social */}
+        <div class="pt-10 mt-10 border-t border-warmborder">
+          <p class="text-caption text-warmgray mb-6">Follow</p>
+          <div class="flex flex-col gap-3">
+            <a href="https://www.instagram.com/_katevoet/" target="_blank" rel="noopener noreferrer" class="text-body text-charcoal hover:text-slateblue transition-colors duration-300 link-underline">Instagram</a>
+            <a href="https://www.linkedin.com/in/kate-voet-78a448383/" target="_blank" rel="noopener noreferrer" class="text-body text-charcoal hover:text-slateblue transition-colors duration-300 link-underline">LinkedIn</a>
+          </div>
         </div>
       </div>
     </div>

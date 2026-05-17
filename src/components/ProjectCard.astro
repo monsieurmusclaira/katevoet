@@ -1,15 +1,35 @@
 ---
+import { Image } from 'astro:assets';
 const { title, img, year, genre, url } = Astro.props;
+
+const allImages = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/img/**/*.{png,jpg,jpeg,webp,avif,gif}'
+);
+const imageKey = `/src/assets${img}`;
+const imageImport = allImages[imageKey];
+const resolvedImage = imageImport ? (await imageImport()).default : null;
 ---
 <a href={url} class="group block relative overflow-hidden bg-charcoal aspect-[4/5] md:aspect-[3/4]">
   {/* Image */}
   <div class="absolute inset-0 img-hover-zoom">
-    <img
-      src={img}
-      alt={title}
-      class="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-90"
-      loading="lazy"
-    />
+    {resolvedImage
+      ? <Image
+          src={resolvedImage}
+          alt={title}
+          class="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-90"
+          widths={[400, 700, 1000]}
+          sizes="(min-width: 768px) 50vw, 100vw"
+          loading="lazy"
+          decoding="async"
+        />
+      : <img
+          src={img}
+          alt={title}
+          class="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-90"
+          loading="lazy"
+          decoding="async"
+        />
+    }
   </div>
 
   {/* Default Overlay */}
@@ -18,7 +38,7 @@ const { title, img, year, genre, url } = Astro.props;
   {/* Content */}
   <div class="absolute bottom-0 left-0 right-0 p-6 md:p-8">
     <div class="transform transition-transform duration-500 ease-out group-hover:-translate-y-2">
-      <p class="text-caption text-white/60 mb-2">{year} — {genre}</p>
+      <p class="text-caption text-[#c8a97e] mb-2">{year} — {genre}</p>
       <h3 class="text-2xl md:text-3xl text-white font-light leading-tight">
         {title}
       </h3>

@@ -1,15 +1,34 @@
 ---
+import { Image } from 'astro:assets';
 const { image, alt, caption, rotation } = Astro.props;
+
+const allImages = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/img/**/*.{png,jpg,jpeg,webp,avif,gif}'
+);
+const imageKey = `/src/assets${image}`;
+const imageImport = allImages[imageKey];
+const resolvedImage = imageImport ? (await imageImport()).default : null;
 ---
 <!--Google Font-->
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
 
-<figure style={rotation}>        
-    <img
-    src={image}
-    loading="lazy"
-    alt={alt}
-    />
+<figure style={rotation}>
+    {resolvedImage
+      ? <Image
+          src={resolvedImage}
+          alt={alt}
+          widths={[300, 600]}
+          sizes="300px"
+          loading="lazy"
+          decoding="async"
+        />
+      : <img
+          src={image}
+          loading="lazy"
+          decoding="async"
+          alt={alt}
+        />
+    }
     <figcaption>{caption}</figcaption>
 </figure>

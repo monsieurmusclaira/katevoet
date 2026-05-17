@@ -2,6 +2,7 @@
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.css';
+
 export interface Props {
 	title: string;
 	description: string;
@@ -9,6 +10,28 @@ export interface Props {
 }
 
 const { title, description, image } = Astro.props;
+
+const siteUrl = Astro.site ?? new URL('https://katevoet.com');
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl);
+const ogImage = image
+  ? new URL(image, siteUrl)
+  : new URL('/social.png', siteUrl);
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Kate Voet',
+  jobTitle: 'Film Director & Screenwriter',
+  url: siteUrl.href,
+  email: 'hi@katevoet.com',
+  nationality: 'Belgian',
+  description: 'Belgian film director and screenwriter based in Brussels. Award-winning VR film A Long Goodbye premiered at Venice Film Festival 2025.',
+  sameAs: [
+    'https://www.instagram.com/_katevoet/',
+    'https://www.linkedin.com/in/kate-voet-78a448383/',
+    'https://hennemanagency.nl/talent/kate-voet/',
+  ],
+};
 ---
 
 <!-- Global Metadata -->
@@ -17,6 +40,17 @@ const { title, description, image } = Astro.props;
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <meta name="generator" content={Astro.generator} />
 
+<!-- Canonical -->
+<link rel="canonical" href={canonicalUrl} />
+
+<!-- Preconnect for external resources -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://unpkg.com" />
+
+<!-- Google Fonts — combined request, trimmed to used weights only -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400&display=swap" />
+
 <!-- Primary Meta Tags -->
 <title>{title}</title>
 <meta name="title" content={title} />
@@ -24,21 +58,19 @@ const { title, description, image } = Astro.props;
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
-<meta property="og:url" content={Astro.url} />
+<meta property="og:url" content={canonicalUrl} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-{
-  image && <meta property="og:image" content={new URL(image, Astro.url)} />
-}
+<meta property="og:image" content={ogImage} />
 
 <!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={Astro.url} />
-<meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={description} />
-{
-  image && <meta property="twitter:image" content={new URL(image, Astro.url)} />
-}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={canonicalUrl} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+<meta name="twitter:creator" content="@katevoet" />
+<meta name="twitter:site" content="@katevoet" />
 
-<!-- Animate On Scroll -->
-<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<!-- JSON-LD: Person schema -->
+<script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
