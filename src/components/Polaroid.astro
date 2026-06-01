@@ -9,10 +9,6 @@ const imageKey = `/src/assets${image}`;
 const imageImport = allImages[imageKey];
 const resolvedImage = imageImport ? (await imageImport()).default : null;
 ---
-<!--Google Font-->
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
-
 <figure style={rotation}>
     {resolvedImage
       ? <Image

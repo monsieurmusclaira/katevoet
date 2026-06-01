@@ -9,7 +9,7 @@ module.exports = {
 			colors: {
 				cream: '#faf8f5',
 				charcoal: '#1a1a1a',
-				warmgray: '#6b6b6b',
+				warmgray: '#5a5a5a',
 				warmborder: '#e8e4df',
 				slateblue: '#3a5a7c',
 			},

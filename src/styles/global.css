@@ -99,15 +99,6 @@ p {
 	background: #999;
 }
 
-/* Grain Overlay (legacy — live SVG filter, kept for reference) */
-.grain {
-	filter: url(#noiseFilter);
-	background: black;
-	mix-blend-mode: overlay;
-	opacity: 25%;
-	pointer-events: none;
-}
-
 /* Grain Overlay — static data-URI approach, rasterised once by browser */
 .grain-overlay {
 	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -209,16 +200,6 @@ p {
 ::selection {
 	background-color: #3a5a7c;
 	color: white;
-}
-
-/* Smooth image loading */
-img {
-	opacity: 1;
-	transition: opacity 0.5s ease;
-}
-
-img[data-loading="true"] {
-	opacity: 0;
 }
 
 /* Respect prefers-reduced-motion: neutralise animations, transitions and

@@ -20,3 +20,6 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
+
+# Affinity Designer source files (not used by the build)
+*.afdesign
