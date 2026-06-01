@@ -2,7 +2,7 @@
 ---
 
 {/* Lightbox Overlay */}
-<div id="lightbox-overlay" class="fixed inset-0 z-[100] bg-charcoal/95 opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center" aria-hidden="true">
+<div id="lightbox-overlay" class="fixed inset-0 z-[100] bg-charcoal/95 opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center" role="dialog" aria-modal="true" aria-label="Image viewer" aria-hidden="true" inert>
   
   {/* Close button */}
   <button id="lightbox-close" class="absolute top-6 right-6 text-white/60 hover:text-white transition-colors duration-300 z-10 p-2" aria-label="Close">
@@ -52,6 +52,7 @@
     let isOpen = false;
     let touchStartX = 0;
     let touchEndX = 0;
+    let lastFocused = null;
 
     // Refresh the images array and cursor styles (safe to call repeatedly)
     function init() {
@@ -72,14 +73,17 @@
 
     function open(index) {
       if (images.length === 0) return;
+      lastFocused = document.activeElement;
       currentIndex = index;
       isOpen = true;
       updateImage();
       overlay.classList.remove('opacity-0', 'pointer-events-none');
       overlay.classList.add('opacity-100', 'pointer-events-auto');
       overlay.setAttribute('aria-hidden', 'false');
+      overlay.removeAttribute('inert');
       document.body.style.overflow = 'hidden';
       updateButtons();
+      closeBtn.focus();
     }
 
     function close() {
@@ -87,7 +91,9 @@
       overlay.classList.remove('opacity-100', 'pointer-events-auto');
       overlay.classList.add('opacity-0', 'pointer-events-none');
       overlay.setAttribute('aria-hidden', 'true');
+      overlay.setAttribute('inert', '');
       document.body.style.overflow = '';
+      if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
     }
 
     function updateImage() {
@@ -145,6 +151,16 @@
         case 'ArrowRight':
           next();
           break;
+        case 'Tab': {
+          // Trap focus within the dialog's controls.
+          const focusable = [closeBtn, prevBtn, nextBtn];
+          const idx = focusable.indexOf(document.activeElement);
+          e.preventDefault();
+          const dir = e.shiftKey ? -1 : 1;
+          const nextIdx = (idx === -1 ? 0 : (idx + dir + focusable.length) % focusable.length);
+          focusable[nextIdx].focus();
+          break;
+        }
       }
     });
 

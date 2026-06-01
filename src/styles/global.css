@@ -220,3 +220,29 @@ img {
 img[data-loading="true"] {
 	opacity: 0;
 }
+
+/* Respect prefers-reduced-motion: neutralise animations, transitions and
+   smooth scrolling. Entrance effects start from opacity:0, so force the
+   final visible state to avoid leaving content hidden. */
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	*, *::before, *::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+
+	.animate-fade-in,
+	.animate-fade-in-up,
+	.animate-fade-in-slow,
+	.drop-in,
+	.drop-in-2,
+	.drop-in-3 {
+		opacity: 1 !important;
+		transform: none !important;
+	}
+}
