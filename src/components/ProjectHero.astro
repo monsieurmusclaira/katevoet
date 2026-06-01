@@ -9,7 +9,7 @@ const imageKey = `/src/assets${heroImage}`;
 const imageImport = allImages[imageKey];
 const resolvedImage = imageImport ? (await imageImport()).default : null;
 ---
-<div class="h-screen w-full relative" data-aos="fade-down" data-aos-duration="300">
+<div class="h-screen w-full relative">
     <div class="z-0 h-screen w-full absolute top-0">
         {resolvedImage
           ? <Image

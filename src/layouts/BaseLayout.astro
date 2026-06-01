@@ -4,6 +4,7 @@ import { ClientRouter } from 'astro:transitions';
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Lightbox from "../components/Lightbox.astro";
+import 'aos/dist/aos.css';
 import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
 const { image, title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
 ---
@@ -23,21 +24,14 @@ const { image, title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.prop
       <Footer />
       <Lightbox />
 
-      <!-- AOS loaded asynchronously — does not block rendering -->
-      <script is:inline>
-        (function() {
-          var link = document.createElement('link');
-          link.rel = 'stylesheet';
-          link.href = 'https://unpkg.com/aos@next/dist/aos.css';
-          document.head.appendChild(link);
-
-          var script = document.createElement('script');
-          script.src = 'https://unpkg.com/aos@next/dist/aos.js';
-          script.onload = function() {
-            AOS.init({ easing: 'ease-out-cubic', duration: 800, once: true });
-          };
-          document.body.appendChild(script);
-        })();
+      <!-- AOS — self-hosted (bundled), re-initialised after view transitions,
+           and disabled when the user prefers reduced motion. -->
+      <script>
+        import AOS from 'aos';
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        AOS.init({ easing: 'ease-out-cubic', duration: 800, once: true, disable: reduceMotion });
+        // Re-scan for [data-aos] elements swapped in by client-side navigation.
+        document.addEventListener('astro:page-load', () => { AOS.refreshHard(); });
       </script>
   </body>
 
