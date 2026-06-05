@@ -2,7 +2,7 @@
   "name": "kate-voet-portfolio",
   "description": "Portfolio website for Kate Voet, director & screenwriter",
   "type": "module",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "private": true,
   "scripts": {
     "dev": "astro dev",
