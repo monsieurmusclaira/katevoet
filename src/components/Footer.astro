@@ -22,7 +22,13 @@ const today = new Date();
     </div>
 
     <p class="text-caption text-white/60">
-      &copy; {today.getFullYear()}
+      &copy; <span id="footer-year">{today.getFullYear()}</span>
     </p>
   </div>
 </footer>
+
+<!-- Static builds freeze the year at build time; refresh it in the browser. -->
+<script is:inline>
+  var fy = document.getElementById('footer-year');
+  if (fy) fy.textContent = new Date().getFullYear();
+</script>

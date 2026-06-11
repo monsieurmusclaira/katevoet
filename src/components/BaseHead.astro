@@ -2,6 +2,7 @@
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.css';
+import { getImage } from 'astro:assets';
 
 export interface Props {
 	title: string;
@@ -13,9 +14,21 @@ const { title, description, image } = Astro.props;
 
 const siteUrl = Astro.site ?? new URL('https://katevoet.com');
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl);
-const ogImage = image
-  ? new URL(image, siteUrl)
-  : new URL('/social.jpg', siteUrl);
+// Resolve a "/img/..." image prop to an optimized built asset for the social
+// card; anything else passes through; default is the generic site card.
+const allImages = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/img/**/*.{png,jpg,jpeg,webp,avif,gif}'
+);
+let ogImage = new URL('/social.jpg', siteUrl);
+if (image) {
+  const imageImport = allImages[`/src/assets${image}`];
+  if (imageImport) {
+    const optimized = await getImage({ src: (await imageImport()).default, width: 1200, format: 'jpeg' });
+    ogImage = new URL(optimized.src, siteUrl);
+  } else {
+    ogImage = new URL(image, siteUrl);
+  }
+}
 
 const personSchema = {
   '@context': 'https://schema.org',
