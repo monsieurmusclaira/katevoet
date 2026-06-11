@@ -23,3 +23,6 @@ pnpm-debug.log*
 
 # Affinity Designer source files (not used by the build)
 *.afdesign
+
+# stray build-output copy
+dist (1)/
