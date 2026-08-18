@@ -5,6 +5,10 @@ import mdx from "@astrojs/mdx";
 // https://astro.build/config
 export default defineConfig({
   site: 'https://katevoet.com',
-  integrations: [sitemap(), mdx()],
+  trailingSlash: 'always',
+  integrations: [sitemap({ serialize(item) {
+    item.lastmod = new Date().toISOString();
+    return item;
+  } }), mdx()],
   prefetch: true
 });

@@ -1,8 +1,59 @@
 ---
 layout: "../../layouts/BaseLayout.astro"
-title: "Les Homards Immortels — Kate Voet"
+title: "Les Homards Immortels — Short Film by Kate Voet (2017)"
 image: "/img/leshomardsimmortels/stills/KateEditE26_AspectWrapper.01_11_04_09.Still191.png"
-description: "Two minds meet again after a brief separation, rediscovering each other while uncovering their motivations to leave and return. A story about being alon..."
+description: "Les Homards Immortels (2017), a short film by Kate Voet. Two minds meet again after a separation, alone and in search of a connection. 12 festival awards."
+schema:
+  "@context": "https://schema.org"
+  "@graph":
+    - "@type": "Movie"
+      "@id": "https://katevoet.com/projects/les-homards-immortels/#movie"
+      name: "Les Homards Immortels"
+      url: "https://katevoet.com/projects/les-homards-immortels/"
+      datePublished: "2017"
+      genre: "Fiction"
+      countryOfOrigin: "Belgium"
+      description: "Two minds meet again after a brief separation, rediscovering each other while uncovering their motivations to leave and return. A story about being alone in search of a connection."
+      image: "/img/leshomardsimmortels/stills/KateEditE26_AspectWrapper.01_11_04_09.Still191.png"
+      director:
+        "@id": "https://katevoet.com/#kate-voet"
+      actor:
+        - name: "Jan Bijvoet"
+        - name: "Jill Verhaeghe"
+      musicBy: "Senjan Jansen"
+      editor: "Jerome Bartholomeus"
+      award:
+        - "Filmfestival Oostende 2017"
+        - "Ciné Privé 2017"
+        - "Black Canvas 2018"
+        - "Festival Cine La Orquídea 2018"
+        - "Brussels Independent Film Festival 2018"
+        - "Festival Internacional de Escuelas de Cine 2018"
+        - "Hong Kong Arthouse Film Festival 2018"
+        - "Venice Film Week 2018"
+        - "Amsterdam Independent Film Festival 2018"
+        - "UITKORT"
+        - "Wunderground 2018"
+        - "CUT:TO Gent 2018 (Best Cinematography)"
+        - "Reykjavík International Film Festival 2019"
+      trailer:
+        "@type": "VideoObject"
+        name: "Les Homards Immortels trailer"
+        embedUrl: "https://player.vimeo.com/video/206725218"
+    - "@type": "BreadcrumbList"
+      itemListElement:
+        - "@type": "ListItem"
+          position: 1
+          name: "Home"
+          item: "https://katevoet.com/"
+        - "@type": "ListItem"
+          position: 2
+          name: "Work"
+          item: "https://katevoet.com/"
+        - "@type": "ListItem"
+          position: 3
+          name: "Les Homards Immortels"
+          item: "https://katevoet.com/projects/les-homards-immortels/"
 ---
 import ProjectHero from '../../components/ProjectHero.astro';
 import CreditsItem from '../../components/CreditsItem.astro';
@@ -13,14 +64,15 @@ export const meta = {
     synopsis: 'Two minds meet again after a brief separation, rediscovering each other while uncovering their motivations to leave and return. A story about being alone in search of a connection.',
     heroImage: '/img/leshomardsimmortels/stills/KateEditE26_AspectWrapper.01_11_04_09.Still191.png',
     imageposition: "40% 50%",
-    imageAlt: 'Les Homards Immortels cinematography still'
+    imageAlt: 'Jan Bijvoet and Jill Verhaeghe in Les Homards Immortels, directed by Kate Voet',
+    featureAlt: 'Jan Bijvoet and Jill Verhaeghe meet in Les Homards Immortels, directed by Kate Voet'
 };
 
 <ProjectHero title={meta.title} synopsis={meta.synopsis} heroImage={meta.heroImage} alt={meta.imageAlt} imageposition={meta.imageposition} />
 
 <section class="hero">
     <div class="hero-content">
-        <ContentPicture image="/img/leshomardsimmortels/stills/KateEditE26_AspectWrapper.01_00_40_17.Still094.png" alt={meta.imageAlt} />
+        <ContentPicture image="/img/leshomardsimmortels/stills/KateEditE26_AspectWrapper.01_00_40_17.Still094.png" alt={meta.featureAlt} />
     </div>
 </section>
 
@@ -81,6 +133,24 @@ export const meta = {
     </div>
 </section>
 
+<section class="hero" data-aos="fade-up" data-aos-duration="600">
+    <div id="awards" class="hero-content grid grid-cols-2 gap-2 text-charcoal">
+        <FestivalsItem festivalname="Filmfestival Oostende 2017" heading="Awards & Festivals" />
+        <FestivalsItem festivalname="Ciné Privé 2017" heading="" />
+        <FestivalsItem festivalname="Black Canvas 2018" heading="" />
+        <FestivalsItem festivalname="Festival Cine La Orquídea 2018" heading="" />
+        <FestivalsItem festivalname="Brussels Independent Film Festival 2018" heading="" />
+        <FestivalsItem festivalname="Festival Internacional de Escuelas de Cine 2018" heading="" />
+        <FestivalsItem festivalname="Hong Kong Arthouse Film Festival 2018" heading="" />
+        <FestivalsItem festivalname="Venice Film Week 2018" heading="" />
+        <FestivalsItem festivalname="Amsterdam Independent Film Festival 2018" heading="" />
+        <FestivalsItem festivalname="UITKORT" heading="" />
+        <FestivalsItem festivalname="Wunderground 2018" heading="" />
+        <FestivalsItem festivalname="CUT:TO Gent 2018 (Best Cinematography)" heading="" />
+        <FestivalsItem festivalname="Reykjavík International Film Festival 2019" heading="" />
+    </div>
+</section>
+
 <section class="hero">
     <div class="hero-content grid grid-cols-1 md:grid-cols-2 gap-3">
         <ContentPicture image="/img/leshomardsimmortels/stills/KateEditE26_AspectWrapper.01_00_50_17.Still097.png" alt={meta.imageAlt} />
@@ -97,14 +167,15 @@ export const meta = {
         <img src="/img/leshomardsimmortels/laurels/leshomardsimmortels_laurel_cineprive2017.svg" alt="Festival Laurel Cineprive 2017" class="w-48" />
         <img src="/img/leshomardsimmortels/laurels/leshomardsimmortels_laurel_blackcanvas2018.svg" alt="Festival Laurel Black Canvas 2018" class="w-48" />
         <img src="/img/leshomardsimmortels/laurels/leshomardsimmortels_laurel_festivalcinelaorquidea2018.svg" alt="Festival Festival Cine Laorquidea 2018" class="w-48" />
-        <img src="/img/leshomardsimmortels/laurels/leshomardsimmortels_laurel_brusselsindependant2018.svg" alt="Festival Brussels Independant 2018" class="w-48" />
+        <img src="/img/leshomardsimmortels/laurels/leshomardsimmortels_laurel_brusselsindependant2018.svg" alt="Festival Brussels Independent 2018" class="w-48" />
         <img src="/img/leshomardsimmortels/laurels/leshomardsimmortels_laurel_escuelesdecine2018.svg" alt="Festival Laurel Escueles de Cine 2018"  class="w-48" />
         <img src="/img/leshomardsimmortels/laurels/leshomardsimmortels_laurel_hongkongarthouse2018.svg" alt="Festival Laurel Hong Kong Arthouse 2018" class="w-48" />
-        <img src="/img/leshomardsimmortels/laurels/leshomardsimmortels_laurel_venicefilmweek2018.svg" alt="Festival Laurel Oostende 2017" class="w-48" />
-        <img src="/img/leshomardsimmortels/laurels/leshomardsimmortels_laurel_amsterdamindependant2018.svg" alt="Festival Laurel Amsterdam Independant 2018" class="w-48" />
+        <img src="/img/leshomardsimmortels/laurels/leshomardsimmortels_laurel_venicefilmweek2018.svg" alt="Festival Laurel Venice Film Week 2018" class="w-48" />
+        <img src="/img/leshomardsimmortels/laurels/leshomardsimmortels_laurel_amsterdamindependant2018.svg" alt="Festival Laurel Amsterdam Independent 2018" class="w-48" />
         <img src="/img/leshomardsimmortels/laurels/leshomardsimmortels_laurel_uitkort.svg" alt="Festival Laurel Uitkort" class="w-48" />
         <img src="/img/leshomardsimmortels/laurels/leshomardsimmortels_laurel_wunderground2018.svg" alt="Festival Laurel Wunderground 2018" class="w-48" />
         <img src="/img/leshomardsimmortels/laurels/leshomardsimmortels_laurel_cuttogent2018.svg" alt="Festival Laurel Cut To Gent 2018" class="w-48" />
+        <img src="/img/leshomardsimmortels/laurels/leshomardsimmortels_laurel_reykjavik2019.svg" alt="Festival Laurel Reykjavík International Film Festival 2019" class="w-48" />
     </div>
 </section>
 
@@ -128,5 +199,15 @@ export const meta = {
         <ContentPicture image="/img/leshomardsimmortels/stills/KateEditE26_AspectWrapper.01_09_27_16.Still184.png" alt={meta.imageAlt} />
         <ContentPicture image="/img/leshomardsimmortels/stills/KateEditE26_AspectWrapper.01_09_33_05.Still185.png" alt={meta.imageAlt} />
         <ContentPicture image="/img/leshomardsimmortels/stills/KateEditE26_AspectWrapper.01_11_04_09.Still191.png" alt={meta.imageAlt} />
+    </div>
+</section>
+
+<section class="px-8 py-16 md:px-16 lg:px-24 bg-cream">
+    <div class="max-w-4xl mx-auto">
+        <p class="text-caption text-warmgray mb-4">More work</p>
+        <div class="flex flex-wrap gap-x-8 gap-y-3">
+            <a href="/projects/a-long-goodbye/" class="text-body text-charcoal link-underline">A Long Goodbye</a>
+            <a href="/projects/the-tears-of-things/" class="text-body text-charcoal link-underline">The Tears of Things</a>
+        </div>
     </div>
 </section>

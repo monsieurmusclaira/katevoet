@@ -2,9 +2,26 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import ProjectGrid from '../components/ProjectGrid.astro';
+import { SITE_TITLE } from '../config';
+
+const homepageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Selected work by Kate Voet',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, item: 'https://katevoet.com/projects/a-long-goodbye/' },
+    { '@type': 'ListItem', position: 2, item: 'https://katevoet.com/projects/the-tears-of-things/' },
+    { '@type': 'ListItem', position: 3, item: 'https://katevoet.com/projects/les-homards-immortels/' },
+  ],
+};
 ---
 
-<BaseLayout title="Kate Voet — Director & Screenwriter">
+<BaseLayout title={SITE_TITLE} schema={homepageSchema}>
   <Hero />
+  <section class="px-8 py-16 md:px-16 md:py-20 lg:px-24 bg-cream">
+    <div class="max-w-3xl mx-auto">
+      <p class="text-body text-lg leading-relaxed text-charcoal">Kate Voet is a Belgian film director and screenwriter based in Brussels. Her short films <em class="font-normal not-italic">Les Homards Immortels</em> (2017) and <em class="font-normal not-italic">The Tears of Things</em> (2021) have toured festivals around the world. Her interactive VR film <em class="font-normal not-italic">A Long Goodbye</em> received the Venice Immersive Achievement Prize at the 82nd Venice Film Festival. She is currently developing two fiction features alongside other projects.</p>
+    </div>
+  </section>
   <ProjectGrid />
 </BaseLayout>

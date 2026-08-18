@@ -15,7 +15,7 @@ const resolvedImage = imageImport ? (await imageImport()).default : null;
     {resolvedImage
       ? <Image
           src={resolvedImage}
-          alt={title}
+          alt=""
           class="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-90"
           widths={[400, 700, 1000]}
           sizes="(min-width: 768px) 50vw, 100vw"
@@ -24,7 +24,7 @@ const resolvedImage = imageImport ? (await imageImport()).default : null;
         />
       : <img
           src={img}
-          alt={title}
+          alt=""
           class="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-90"
           loading="lazy"
           decoding="async"

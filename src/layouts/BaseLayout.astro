@@ -13,13 +13,15 @@ const {
   image = fm.image,
   title = fm.title ?? SITE_TITLE,
   description = fm.description ?? SITE_DESCRIPTION,
+  schema = fm.schema,
+  noindex = false,
 } = Astro.props;
 ---
 <!DOCTYPE html>
 <html lang="en" data-theme="kate">
 
   <head>
-    <BaseHead title={title} description={description} image={image} />
+    <BaseHead title={title} description={description} image={image} schema={schema} noindex={noindex} />
   </head>
 
   <body class="bg-cream antialiased">

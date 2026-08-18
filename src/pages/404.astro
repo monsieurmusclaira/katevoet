@@ -1,0 +1,22 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import still from '../assets/img/thetearsofthings/stills/TTOT_20212101_1.1.134.webp';
+---
+
+<BaseLayout title="Page not found — Kate Voet" description="The requested page could not be found." noindex={true}>
+  <section class="min-h-[70vh] px-8 py-32 md:px-16 lg:px-24 flex items-center bg-cream">
+    <div class="max-w-4xl mx-auto w-full grid gap-10 md:grid-cols-2 items-center">
+      <div>
+        <p class="text-caption text-warmgray mb-4">404</p>
+        <h1 class="text-5xl md:text-7xl text-charcoal mb-6">Page not found</h1>
+        <p class="text-body text-charcoal mb-8">This scene is missing. Return to the work or learn more about Kate Voet.</p>
+        <div class="flex flex-wrap gap-6">
+          <a href="/" class="text-body text-charcoal link-underline">Back to work</a>
+          <a href="/about/" class="text-body text-charcoal link-underline">About Kate</a>
+        </div>
+      </div>
+      <Image src={still} alt="Film still from The Tears of Things, directed by Kate Voet" class="w-full h-auto" widths={[600, 900]} sizes="(min-width: 768px) 50vw, 100vw" loading="eager" />
+    </div>
+  </section>
+</BaseLayout>

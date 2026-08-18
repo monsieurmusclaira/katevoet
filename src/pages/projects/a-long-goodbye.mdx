@@ -1,8 +1,63 @@
 ---
 layout: "../../layouts/BaseLayout.astro"
-title: "A Long Goodbye — Kate Voet"
+title: "A Long Goodbye — VR Film by Kate Voet | Venice 2025"
 image: "/img/alonggoodbye/stills/20250709_ALG_Still2.webp"
-description: "A Long Goodbye is an animated, interactive VR experience following Ida, a 72-year-old pianist with dementia. As her reality fades, players interact with..."
+description: "A Long Goodbye is an interactive VR film by Kate Voet following Ida, a pianist living with dementia. Winner of the Venice Immersive Achievement Prize 2025."
+schema:
+  "@context": "https://schema.org"
+  "@graph":
+    - "@type": "Movie"
+      "@id": "https://katevoet.com/projects/a-long-goodbye/#movie"
+      name: "A Long Goodbye"
+      url: "https://katevoet.com/projects/a-long-goodbye/"
+      datePublished: "2025"
+      genre: "Virtual Reality"
+      countryOfOrigin: "Belgium"
+      description: "A Long Goodbye is an animated, interactive VR experience following Ida, a 72-year-old pianist with dementia. As her reality fades, players interact with objects and recordings in her empty apartment, causing her world and memories of her beloved husband, Daniel, to be vividly drawn to life. A Long Goodbye is a poetic exploration of love and the emotional toll of dementia on two people who shared a lifetime."
+      image: "/img/alonggoodbye/stills/20250709_ALG_Still2.webp"
+      director:
+        - "@id": "https://katevoet.com/#kate-voet"
+        - name: "Victor Maes"
+      actor:
+        - name: "Elizabeth Counsel"
+        - name: "Richard Wells"
+        - name: "Marlies Heuer"
+        - name: "Derek de Lint"
+      musicBy: "Joep Beving"
+      productionCompany:
+        - "Cassette for Timescapes"
+        - "Valk Productions"
+        - "Tarantula"
+      award:
+        - "La Biennale Di Venezia 82 - Venice Immersive Achievement Prize"
+        - "SXSW - Agog Immersive Impact Award"
+        - "Clermont-Ferrand - Best XR Film"
+        - "Thessaloniki International Film Festival - Golden Alexander"
+        - "Belgian Game Awards - Best Applied Game"
+        - "United XR Awards - Best Art Direction"
+        - "Miami Film Gate - Best of Fest"
+        - "XR Must Awards - Best Non-Fiction World"
+      funder:
+        - "Flanders Audiovisual Fund - VAF (BE)"
+        - "Creative Europe MEDIA programme (EU)"
+        - "The Netherlands Film Fund (NL)"
+        - "Film Fund Luxembourg (LUX)"
+        - "deAuteurs (BE)"
+        - "Pictanovo (FR)"
+    - "@type": "BreadcrumbList"
+      itemListElement:
+        - "@type": "ListItem"
+          position: 1
+          name: "Home"
+          item: "https://katevoet.com/"
+        - "@type": "ListItem"
+          position: 2
+          name: "Work"
+          item: "https://katevoet.com/"
+        - "@type": "ListItem"
+          position: 3
+          name: "A Long Goodbye"
+          item: "https://katevoet.com/projects/a-long-goodbye/"
 ---
 import ProjectHero from '../../components/ProjectHero.astro';
 import CreditsItem from '../../components/CreditsItem.astro';
@@ -13,14 +68,15 @@ export const meta = {
     synopsis: 'A Long Goodbye is an animated, interactive VR experience following Ida, a 72-year-old pianist with dementia. As her reality fades, players interact with objects and recordings in her empty apartment, causing her world and memories of her beloved husband, Daniel, to be vividly drawn to life. A Long Goodbye is a poetic exploration of love and the emotional toll of dementia on two people who shared a lifetime.',
     heroImage: '/img/alonggoodbye/stills/20250709_ALG_Still2.webp',
     imageposition: "50% 50%",
-    imageAlt: 'A Long Goodbye still'
+    imageAlt: 'Ida in her apartment in A Long Goodbye, directed by Kate Voet',
+    featureAlt: 'An empty apartment in A Long Goodbye, directed by Kate Voet'
 };
 
 <ProjectHero title={meta.title} synopsis={meta.synopsis} heroImage={meta.heroImage} alt={meta.imageAlt} imageposition={meta.imageposition} />
 
 <section class="hero">
     <div class="hero-content">
-        <ContentPicture image="/img/alonggoodbye/stills/20250709_ALG_Still1.webp" alt={meta.imageAlt} />
+        <ContentPicture image="/img/alonggoodbye/stills/20250709_ALG_Still1.webp" alt={meta.featureAlt} />
     </div>
 </section>
 
@@ -112,8 +168,17 @@ export const meta = {
 
 <section class="hero">
     <div class="hero-content">
-        <ContentPicture image="/img/alonggoodbye/stills/20250709_ALG_Still3.webp" alt={meta.imageAlt} />
-        <ContentPicture image="/img/alonggoodbye/stills/20250709_ALG_Still2.webp" alt={meta.imageAlt} />
+        <ContentPicture image="/img/alonggoodbye/stills/20250709_ALG_Still3.webp" alt="A Long Goodbye film still of Ida's memories, directed by Kate Voet" />
+        <ContentPicture image="/img/alonggoodbye/stills/20250709_ALG_Still2.webp" alt="A Long Goodbye film still of Ida, directed by Kate Voet" />
     </div>
 </section>
 
+<section class="px-8 py-16 md:px-16 lg:px-24 bg-cream">
+    <div class="max-w-4xl mx-auto">
+        <p class="text-caption text-warmgray mb-4">More work</p>
+        <div class="flex flex-wrap gap-x-8 gap-y-3">
+            <a href="/projects/the-tears-of-things/" class="text-body text-charcoal link-underline">The Tears of Things</a>
+            <a href="/projects/les-homards-immortels/" class="text-body text-charcoal link-underline">Les Homards Immortels</a>
+        </div>
+    </div>
+</section>

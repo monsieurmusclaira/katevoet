@@ -8,9 +8,11 @@ export interface Props {
 	title: string;
 	description: string;
 	image?: string;
+	schema?: unknown;
+	noindex?: boolean;
 }
 
-const { title, description, image } = Astro.props;
+const { title, description, image, schema, noindex = false } = Astro.props;
 
 const siteUrl = Astro.site ?? new URL('https://katevoet.com');
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl);
@@ -20,24 +22,59 @@ const allImages = import.meta.glob<{ default: ImageMetadata }>(
   '/src/assets/img/**/*.{png,jpg,jpeg,webp,avif,gif}'
 );
 let ogImage = new URL('/social.jpg', siteUrl);
+let ogImageWidth = 1200;
+let ogImageHeight = 630;
+let ogImageType = 'image/jpeg';
 if (image) {
   const imageImport = allImages[`/src/assets${image}`];
   if (imageImport) {
     const optimized = await getImage({ src: (await imageImport()).default, width: 1200, format: 'jpeg' });
     ogImage = new URL(optimized.src, siteUrl);
+    ogImageWidth = optimized.width;
+    ogImageHeight = optimized.height;
+    ogImageType = `image/${optimized.format}`;
   } else {
     ogImage = new URL(image, siteUrl);
   }
 }
 
+function replaceSchemaImage(value: unknown): unknown {
+  if (value === image && image) return ogImage.href;
+  if (Array.isArray(value)) return value.map(replaceSchemaImage);
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(Object.entries(value).map(([key, entry]) => [key, replaceSchemaImage(entry)]));
+  }
+  return value;
+}
+
+const pageSchema = schema ? replaceSchemaImage(schema) : null;
+const pageType = Astro.url.pathname === '/about/'
+  ? 'profile'
+  : Astro.url.pathname.startsWith('/projects/')
+    ? 'video.movie'
+    : 'website';
+
 const personSchema = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Kate Voet',
-  jobTitle: 'Film Director & Screenwriter',
-  url: siteUrl.href,
+  '@id': 'https://katevoet.com/#kate-voet',
+  jobTitle: ['Film Director', 'Screenwriter'],
+  url: new URL('/about/', siteUrl).href,
   email: 'hi@katevoet.com',
   nationality: 'Belgian',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Brussels',
+    addressCountry: 'Belgium',
+  },
+  alumniOf: ['University of Amsterdam', 'LUCA School of Arts', 'The New School'],
+  knowsAbout: ['Film direction', 'Screenwriting', 'Interactive VR film'],
+  award: [
+    'Venice Immersive Achievement Prize',
+    'Best XR Film at Clermont-Ferrand',
+    'Agog Immersive Impact Award at SXSW',
+  ],
   description: 'Belgian film director and screenwriter based in Brussels. Award-winning VR film A Long Goodbye premiered at Venice Film Festival 2025.',
   sameAs: [
     'https://www.instagram.com/_katevoet/',
@@ -51,7 +88,11 @@ const personSchema = {
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<meta name="theme-color" content="#2664aa" />
 <meta name="generator" content={Astro.generator} />
+{noindex && <meta name="robots" content="noindex" />}
 
 <!-- Canonical -->
 <link rel="canonical" href={canonicalUrl} />
@@ -65,15 +106,20 @@ const personSchema = {
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>
-<meta name="title" content={title} />
 <meta name="description" content={description} />
 
 <!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
+<meta property="og:type" content={pageType} />
 <meta property="og:url" content={canonicalUrl} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
+<meta property="og:site_name" content="Kate Voet" />
+<meta property="og:locale" content="en_US" />
 <meta property="og:image" content={ogImage} />
+<meta property="og:image:width" content={ogImageWidth} />
+<meta property="og:image:height" content={ogImageHeight} />
+<meta property="og:image:type" content={ogImageType} />
+<meta property="og:image:alt" content={`${title} — film still`} />
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
@@ -81,8 +127,8 @@ const personSchema = {
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={ogImage} />
-<meta name="twitter:creator" content="@katevoet" />
-<meta name="twitter:site" content="@katevoet" />
+<meta name="twitter:image:alt" content={`${title} — film still`} />
 
 <!-- JSON-LD: Person schema -->
 <script type="application/ld+json" is:inline set:html={JSON.stringify(personSchema)} />
+{pageSchema && <script type="application/ld+json" is:inline set:html={JSON.stringify(pageSchema)} />}

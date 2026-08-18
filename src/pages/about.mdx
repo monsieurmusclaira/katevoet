@@ -1,19 +1,27 @@
 ---
 layout: "../layouts/BaseLayout.astro"
-title: "About — Kate Voet"
+title: "About Kate Voet — Belgian Film Director & Screenwriter"
 image: "/img/thetearsofthings/stills/TTOT_20221008_1.19.1.png"
 description: "Kate Voet is a Belgian film director and screenwriter from Brussels. Her VR film A Long Goodbye won the Venice Immersive Achievement Prize at the 82nd Venice Film Festival."
+schema:
+  "@context": "https://schema.org"
+  "@type": "ProfilePage"
+  "@id": "https://katevoet.com/about/#profile"
+  url: "https://katevoet.com/about/"
+  name: "About Kate Voet"
+  mainEntity:
+    "@id": "https://katevoet.com/#kate-voet"
 ---
 import ContentPicture from '../components/ContentPicture.astro';
 import { Image } from 'astro:assets';
 import aboutHero from '../assets/img/thetearsofthings/stills/TTOT_20221008_1.19.1.png';
 export const meta = {
     title: 'About',
-    imageAlt: 'Film still'
+    imageAlt: 'Film still from The Tears of Things, directed by Kate Voet'
 };
 
 {/* Hero Section */}
-<section class="relative h-[70vh] w-full overflow-hidden">
+<section class="relative h-[70vh] w-full overflow-hidden" data-hero>
   <div class="absolute inset-0 z-0">
     <Image
       src={aboutHero}
