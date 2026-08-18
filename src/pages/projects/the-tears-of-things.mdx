@@ -80,7 +80,7 @@ export const meta = {
                 <CreditGroup lead role="Director" names={['Kate Voet']} />
                 <CreditGroup lead role="Cast" names={['Lydia Injova', 'Jakub Kotynski']} />
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-10">
+            <div class="grid grid-cols-1 sm:grid-cols-[repeat(auto-fill,minmax(13rem,1fr))] gap-x-8 gap-y-10">
                 <CreditGroup role="Producer" names={['Songs in the Dark']} />
                 <CreditGroup role="Co-producer" names={['Eyeworks', 'Peter Bouckaert']} />
                 <CreditGroup role="Assistant Director" names={['Jelle Maseman', 'Niko Himschoot']} />
@@ -114,12 +114,12 @@ export const meta = {
     </div>
 </section>
 
-<section class="px-8 py-16 md:px-16 lg:px-24 bg-cream">
-    <div class="max-w-4xl mx-auto">
+<section class="py-20 md:py-28 px-8 md:px-16 lg:px-24 bg-cream">
+    <div class="w-full max-w-6xl mx-auto">
         <p class="text-caption text-warmgray mb-4">More work</p>
-        <div class="flex flex-wrap gap-x-8 gap-y-3">
-            <a href="/projects/a-long-goodbye/" class="text-body text-charcoal link-underline">A Long Goodbye</a>
-            <a href="/projects/les-homards-immortels/" class="text-body text-charcoal link-underline">Les Homards Immortels</a>
+        <div class="flex flex-wrap gap-x-10 gap-y-3">
+            <a href="/projects/a-long-goodbye/" class="font-cormorant font-light text-2xl md:text-3xl text-charcoal link-underline">A Long Goodbye</a>
+            <a href="/projects/les-homards-immortels/" class="font-cormorant font-light text-2xl md:text-3xl text-charcoal link-underline">Les Homards Immortels</a>
         </div>
     </div>
 </section>
