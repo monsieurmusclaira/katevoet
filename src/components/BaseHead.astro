@@ -3,6 +3,8 @@
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.css';
 import { getImage } from 'astro:assets';
+import cormorantGaramond300 from '@fontsource/cormorant-garamond/files/cormorant-garamond-latin-300-normal.woff2?url';
+import montserrat400 from '@fontsource/montserrat/files/montserrat-latin-400-normal.woff2?url';
 
 export interface Props {
 	title: string;
@@ -97,12 +99,10 @@ const personSchema = {
 <!-- Canonical -->
 <link rel="canonical" href={canonicalUrl} />
 
-<!-- Preconnect for external resources -->
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-<!-- Google Fonts — combined request, trimmed to used weights only -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400&display=swap" />
+<!-- Above-the-fold fonts are self-hosted via @fontsource. -->
+<link rel="preload" as="font" type="font/woff2" crossorigin href={cormorantGaramond300} />
+<link rel="preload" as="font" type="font/woff2" crossorigin href={montserrat400} />
+<script is:inline>document.documentElement.classList.add('js');</script>
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>

@@ -1,8 +1,10 @@
 ---
 const { heading, festivalname } = Astro.props;
 ---
-{heading
-  ? <h2 class="text-right font-montserrat font-light text-secondary text-base tracking-normal leading-[1.7]">{heading}</h2>
-  : <p class="text-right font-light text-secondary"></p>
+{heading &&
+  <div class="col-span-full mb-4">
+    <p class="text-caption text-warmgray mb-2">Film record</p>
+    <h2 class="text-2xl md:text-3xl text-charcoal">{heading}</h2>
+  </div>
 }
-<p class="text-left font-bold">{festivalname}</p>
+<p class="font-light md:text-right">{festivalname}</p>

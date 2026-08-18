@@ -4,7 +4,12 @@ import { ClientRouter } from 'astro:transitions';
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Lightbox from "../components/Lightbox.astro";
-import 'aos/dist/aos.css';
+import '@fontsource/cormorant-garamond/300.css';
+import '@fontsource/cormorant-garamond/400.css';
+import '@fontsource/cormorant-garamond/300-italic.css';
+import '@fontsource/cormorant-garamond/400-italic.css';
+import '@fontsource/montserrat/300.css';
+import '@fontsource/montserrat/400.css';
 import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
 // Props arrive directly (component usage, e.g. index.astro) or via
 // `frontmatter` (MDX pages with `layout:` in their frontmatter).
@@ -18,29 +23,44 @@ const {
 } = Astro.props;
 ---
 <!DOCTYPE html>
-<html lang="en" data-theme="kate">
+<html lang="en">
 
   <head>
     <BaseHead title={title} description={description} image={image} schema={schema} noindex={noindex} />
   </head>
 
   <body class="bg-cream antialiased">
+      <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[110] focus:bg-cream focus:px-4 focus:py-3 focus:text-charcoal">Skip to content</a>
       <Header />
       <ClientRouter />
-      <main>
+      <main id="main">
         <slot />
       </main>
       <Footer />
       <Lightbox />
 
-      <!-- AOS — self-hosted (bundled), re-initialised after view transitions,
-           and disabled when the user prefers reduced motion. -->
       <script>
-        import AOS from 'aos';
         const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        AOS.init({ easing: 'ease-out-cubic', duration: 800, once: true, disable: reduceMotion });
-        // Re-scan for [data-aos] elements swapped in by client-side navigation.
-        document.addEventListener('astro:page-load', () => { AOS.refreshHard(); });
+        const observer = 'IntersectionObserver' in window && !reduceMotion
+          ? new IntersectionObserver((entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add('in-view');
+                  observer.unobserve(entry.target);
+                }
+              });
+            }, { threshold: 0.1 })
+          : null;
+
+        function reveal() {
+          document.querySelectorAll('[data-aos]').forEach((element) => {
+            if (observer) observer.observe(element);
+            else element.classList.add('in-view');
+          });
+        }
+
+        reveal();
+        document.addEventListener('astro:page-load', reveal);
       </script>
   </body>
 

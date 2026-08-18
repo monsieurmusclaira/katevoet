@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 const { image, alt } = Astro.props;
 
 // Resolve image from src/assets — paths come in as "/img/..."
@@ -12,8 +12,10 @@ const resolvedImage = imageImport ? (await imageImport()).default : null;
 ---
 <section class="overflow-hidden">
   {resolvedImage
-    ? <Image
+    ? <Picture
         src={resolvedImage}
+        formats={['avif']}
+        fallbackFormat="webp"
         alt={alt}
         class="w-full h-auto"
         widths={[600, 900, 1200, 1800]}

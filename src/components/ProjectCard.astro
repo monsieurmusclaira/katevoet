@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 const { title, img, year, genre, url } = Astro.props;
 
 const allImages = import.meta.glob<{ default: ImageMetadata }>(
@@ -13,8 +13,10 @@ const resolvedImage = imageImport ? (await imageImport()).default : null;
   {/* Image */}
   <div class="absolute inset-0 img-hover-zoom">
     {resolvedImage
-      ? <Image
+      ? <Picture
           src={resolvedImage}
+          formats={['avif']}
+          fallbackFormat="webp"
           alt=""
           class="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-90"
           widths={[400, 700, 1000]}

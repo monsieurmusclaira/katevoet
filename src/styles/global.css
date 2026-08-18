@@ -9,7 +9,7 @@ html {
 }
 
 html, body {
-	font-size: 15px;
+	font-size: 16px;
 	background-color: #faf8f5;
 	margin: 0;
 	color: #1a1a1a;
@@ -75,7 +75,7 @@ p {
 .text-caption {
 	font-family: "Montserrat", Helvetica, Arial, sans-serif;
 	font-weight: 400;
-	font-size: 0.75rem;
+	font-size: 0.8125rem;
 	letter-spacing: 0.1em;
 	text-transform: uppercase;
 	/* colour is set contextually via Tailwind utilities */
@@ -106,6 +106,25 @@ p {
 	background-size: 200px 200px;
 	mix-blend-mode: overlay;
 	pointer-events: none;
+}
+
+/* Scroll-reveal animations. The .js gate keeps content visible without JavaScript. */
+.js [data-aos] {
+	opacity: 0;
+	transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.js [data-aos="fade-up"] {
+	transform: translateY(1.5rem);
+}
+
+.js [data-aos="fade"],
+.js [data-aos].in-view {
+	transform: none;
+}
+
+.js [data-aos].in-view {
+	opacity: 1;
 }
 
 /* Fade Animations */
