@@ -117,6 +117,15 @@
     }
   }, { passive: true });
 
+  // Same rAF/ticking pattern — keeps the header colour in sync when the
+  // viewport changes size mid-hero (window resize, device rotation).
+  window.addEventListener('resize', () => {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(() => { updateNav(); ticking = false; });
+    }
+  }, { passive: true });
+
   document.addEventListener('visibilitychange', () => {
     ticking = false;
     if (!document.hidden) updateNav();

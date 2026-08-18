@@ -37,9 +37,16 @@ for (const file of htmlFiles) {
   for (const match of html.matchAll(hrefRe)) {
     const href = match[1];
     if (!href.startsWith('/') || href.startsWith('//')) continue; // external / mailto / #handled below
-    const target = href.split('#')[0].replace(/\/$/, '') || '/';
+    const pathOnly = href.split('#')[0];
+    const target = pathOnly.replace(/\/$/, '') || '/';
     if (!exists(target)) {
       console.error(`BROKEN: ${file.replace(distDir, '')} -> ${href}`);
+      broken++;
+    }
+    // Site is built with trailingSlash: 'always' — an extension-less internal
+    // href without a trailing slash (e.g. "/about") would 404 on GitHub Pages.
+    if (pathOnly !== '/' && !pathOnly.endsWith('/') && extname(pathOnly) === '') {
+      console.error(`BROKEN: ${file.replace(distDir, '')} -> ${href} (missing trailing slash)`);
       broken++;
     }
   }
