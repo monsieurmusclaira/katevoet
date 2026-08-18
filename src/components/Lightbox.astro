@@ -56,6 +56,7 @@
 
     // Refresh the images array and cursor styles (safe to call repeatedly)
     function init() {
+      currentIndex = 0;
       images = Array.from(document.querySelectorAll('img[data-lightbox]'));
       images.forEach((image) => {
         image.style.cursor = 'zoom-in';
@@ -87,18 +88,20 @@
       closeBtn.focus();
     }
 
-    function close() {
+    function close(restoreFocus = true) {
       isOpen = false;
       overlay.classList.remove('opacity-100', 'pointer-events-auto');
       overlay.classList.add('opacity-0', 'pointer-events-none');
       overlay.setAttribute('aria-hidden', 'true');
       overlay.setAttribute('inert', '');
       document.body.style.overflow = '';
-      if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+      if (restoreFocus && lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+      lastFocused = null;
     }
 
     function updateImage() {
       const currentImg = images[currentIndex];
+      if (!currentImg) { close(false); return; }
       img.src = currentImg.currentSrc || currentImg.src;
       img.alt = currentImg.alt || '';
       caption.textContent = currentImg.alt || '';
@@ -126,9 +129,16 @@
       const atEnd = currentIndex === images.length - 1;
       prevBtn.classList.toggle('opacity-30', atStart);
       prevBtn.classList.toggle('pointer-events-none', atStart);
+      prevBtn.setAttribute('aria-disabled', String(atStart));
       nextBtn.classList.toggle('opacity-30', atEnd);
       nextBtn.classList.toggle('pointer-events-none', atEnd);
+      nextBtn.setAttribute('aria-disabled', String(atEnd));
     }
+
+    // The overlay persists across view transitions, so it must be dismissed
+    // before the swap — otherwise it strands over the next page, still showing
+    // the previous gallery's image, with the body scroll lock silently lost.
+    document.addEventListener('astro:before-swap', () => { if (isOpen) close(false); });
 
     // Event listeners
     closeBtn.addEventListener('click', close);

@@ -1,6 +1,6 @@
 ---
 import { Picture } from 'astro:assets';
-const { image, alt } = Astro.props;
+const { image, alt, index, total } = Astro.props;
 
 // Resolve image from src/assets — paths come in as "/img/..."
 const allImages = import.meta.glob<{ default: ImageMetadata }>(
@@ -11,7 +11,11 @@ const imageImport = allImages[imageKey];
 const resolvedImage = imageImport ? (await imageImport()).default : null;
 ---
 <section class="overflow-hidden w-full">
-  <button type="button" class="block w-full" aria-label={`Enlarge image: ${alt}`}>
+  <button
+    type="button"
+    class="block w-full"
+    aria-label={index && total ? `Enlarge image ${index} of ${total}: ${alt}` : `Enlarge image: ${alt}`}
+  >
   {resolvedImage
     ? <Picture
         src={resolvedImage}

@@ -8,10 +8,12 @@ const nameList = Array.isArray(names) ? names : [names];
   <p class="text-caption text-warmgray mb-3">{role}</p>
   <ul
     class:list={[
-      'font-cormorant font-light text-charcoal',
+      'text-charcoal',
       lead ? 'text-3xl md:text-4xl leading-tight' : 'text-xl md:text-2xl leading-snug',
     ]}
   >
-    {nameList.map((name) => <li class="break-words hyphens-none">{name}</li>)}
+    {/* The display face goes on the <li>: global.css styles `li` by element,
+        which beats a family inherited from the list. */}
+    {nameList.map((name) => <li class="font-cormorant font-light break-words">{name}</li>)}
   </ul>
 </div>

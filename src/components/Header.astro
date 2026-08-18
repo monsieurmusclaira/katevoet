@@ -78,11 +78,17 @@
 
   // Per-page setup: apply the colour state and close any menu left open by the
   // previous page. The delegated toggle listener below is bound only once.
+  function closeMobileMenu() {
+    document.getElementById('mobile-menu')?.classList.add('hidden');
+    const btn = document.getElementById('mobile-menu-btn');
+    if (!btn) return;
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-label', 'Open menu');
+  }
+
   function initNav() {
     updateNav();
-    document.getElementById('mobile-menu')?.classList.add('hidden');
-    document.getElementById('mobile-menu-btn')?.setAttribute('aria-expanded', 'false');
-    document.getElementById('mobile-menu-btn')?.setAttribute('aria-label', 'Open menu');
+    closeMobileMenu();
   }
 
   // Delegation keeps one listener alive across Astro view-transition swaps.
@@ -102,9 +108,8 @@
     const menu = document.getElementById('mobile-menu');
     const btn = document.getElementById('mobile-menu-btn');
     if (!menu || !btn || menu.classList.contains('hidden')) return;
-    menu.classList.add('hidden');
-    btn.setAttribute('aria-expanded', 'false');
-    btn.setAttribute('aria-label', 'Open menu');
+    closeMobileMenu();
+    btn.focus();
   });
 
   // Scroll listener bound ONCE — window persists across view transitions, so
@@ -122,7 +127,13 @@
   window.addEventListener('resize', () => {
     if (!ticking) {
       ticking = true;
-      requestAnimationFrame(() => { updateNav(); ticking = false; });
+      requestAnimationFrame(() => {
+        updateNav();
+        // The menu is hidden by `md:hidden` above the breakpoint, so its
+        // button state has to be reset or it keeps announcing "Close menu".
+        if (window.matchMedia('(min-width: 768px)').matches) closeMobileMenu();
+        ticking = false;
+      });
     }
   }, { passive: true });
 

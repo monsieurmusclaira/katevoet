@@ -15,9 +15,11 @@ const resolvedImage = imageImport ? (await imageImport()).default : null;
     'group block relative overflow-hidden bg-charcoal',
     // Sources are 16:9 film stills — portrait crops discarded most of the
     // frame and upscaled. These ratios stay close to native, so the browser
-    // never scales past the source. Only one md: aspect is emitted per card,
-    // since two equal-specificity rules would race in the cascade.
-    featured ? 'aspect-[3/2] md:col-span-2 md:aspect-[21/9]' : 'aspect-[3/2]',
+    // never scales past the source. Ratios step up by breakpoint (never two at
+    // the same one, which would race in the cascade); the taller 4/3 on small
+    // phones keeps the caption block from clipping. A min-height would instead
+    // make aspect-ratio derive width from height and overflow the column.
+    featured ? 'aspect-[4/3] sm:aspect-[3/2] md:col-span-2 md:aspect-[21/9]' : 'aspect-[4/3] sm:aspect-[3/2]',
   ]}
 >
   {/* Image */}
@@ -29,8 +31,10 @@ const resolvedImage = imageImport ? (await imageImport()).default : null;
           fallbackFormat="webp"
           alt=""
           class="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-90"
-          widths={featured ? [800, 1200, 1600, 2200] : [500, 800, 1100, 1600]}
-          sizes={featured ? '(min-width: 768px) 92vw, 100vw' : '(min-width: 768px) 46vw, 100vw'}
+          widths={featured ? [800, 1200, 1600, 1920] : [500, 800, 1100, 1600]}
+          sizes={featured
+            ? '(min-width: 1472px) 1280px, (min-width: 1024px) calc(100vw - 192px), (min-width: 768px) calc(100vw - 128px), calc(100vw - 64px)'
+            : '(min-width: 1472px) 624px, (min-width: 1024px) calc((100vw - 224px) / 2), (min-width: 768px) calc((100vw - 160px) / 2), calc(100vw - 64px)'}
           quality={80}
           loading="lazy"
           decoding="async"
@@ -46,7 +50,7 @@ const resolvedImage = imageImport ? (await imageImport()).default : null;
   </div>
 
   {/* Default Overlay */}
-  <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-100 transition-opacity duration-500"></div>
+  <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-transparent opacity-100 transition-opacity duration-500"></div>
 
   {/* Content */}
   <div class="absolute bottom-0 left-0 right-0 p-6 md:p-8">
