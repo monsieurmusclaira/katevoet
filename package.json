@@ -12,20 +12,16 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astro-community/astro-embed-youtube": "^0.5.10",
-    "@astrojs/markdown-remark": "^7.2.0",
     "@astrojs/mdx": "^5.0.6",
     "@astrojs/sitemap": "^3.7.3",
     "aos": "^2.3.4",
     "astro": "^6.4.6",
-    "astro-google-analytics": "^1.0.3",
     "autoprefixer": "^10.5.0",
     "postcss": "^8.5.15",
     "tailwindcss": "^3.4.19"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.20",
-    "daisyui": "^4.12.10",
-    "sass": "^1.100.0"
+    "daisyui": "^4.12.10"
   }
 }

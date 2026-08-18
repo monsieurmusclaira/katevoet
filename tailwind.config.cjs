@@ -15,9 +15,6 @@ module.exports = {
 			},
 		},
 	},
-	container: {
-		center: true,
-	},
 	daisyui: {
 		themes: [
 		  {
