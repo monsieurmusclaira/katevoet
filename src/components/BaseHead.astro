@@ -32,9 +32,9 @@ if (image) {
   if (imageImport) {
     const optimized = await getImage({ src: (await imageImport()).default, width: 1200, format: 'jpeg' });
     ogImage = new URL(optimized.src, siteUrl);
-    ogImageWidth = optimized.width;
-    ogImageHeight = optimized.height;
-    ogImageType = `image/${optimized.format}`;
+    ogImageWidth = Number(optimized.attributes.width ?? optimized.options.width ?? 1200);
+    ogImageHeight = Number(optimized.attributes.height ?? optimized.options.height ?? 630);
+    ogImageType = `image/${optimized.options.format ?? 'jpeg'}`;
   } else {
     ogImage = new URL(image, siteUrl);
   }
@@ -116,8 +116,8 @@ const personSchema = {
 <meta property="og:site_name" content="Kate Voet" />
 <meta property="og:locale" content="en_US" />
 <meta property="og:image" content={ogImage} />
-<meta property="og:image:width" content={ogImageWidth} />
-<meta property="og:image:height" content={ogImageHeight} />
+<meta property="og:image:width" content={String(ogImageWidth)} />
+<meta property="og:image:height" content={String(ogImageHeight)} />
 <meta property="og:image:type" content={ogImageType} />
 <meta property="og:image:alt" content={`${title} — film still`} />
 

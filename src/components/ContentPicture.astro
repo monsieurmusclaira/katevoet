@@ -11,6 +11,7 @@ const imageImport = allImages[imageKey];
 const resolvedImage = imageImport ? (await imageImport()).default : null;
 ---
 <section class="overflow-hidden">
+  <button type="button" class="block w-full" aria-label="Enlarge image">
   {resolvedImage
     ? <Picture
         src={resolvedImage}
@@ -33,4 +34,5 @@ const resolvedImage = imageImport ? (await imageImport()).default : null;
         data-lightbox
       />
   }
+  </button>
 </section>

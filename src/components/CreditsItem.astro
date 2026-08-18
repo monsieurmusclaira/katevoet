@@ -1,5 +1,5 @@
 ---
 const { crewfunction, crewname } = Astro.props;
 ---
-<p class="text-right font-light">{crewfunction}</p>
-<p class="text-left font-bold">{crewname}</p>
+{crewfunction && <p class="font-light md:text-right">{crewfunction}</p>}
+<p class={`font-bold ${crewfunction ? '' : 'md:col-start-2'}`}>{crewname}</p>

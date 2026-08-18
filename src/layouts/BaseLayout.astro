@@ -46,7 +46,7 @@ const {
               entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                   entry.target.classList.add('in-view');
-                  observer.unobserve(entry.target);
+                  if (observer) observer.unobserve(entry.target);
                 }
               });
             }, { threshold: 0.1 })

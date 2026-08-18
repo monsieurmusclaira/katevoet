@@ -1,6 +1,6 @@
 ---
 import { Picture } from 'astro:assets';
-const { title, img, year, genre, url } = Astro.props;
+const { title, img, year, genre, url, featured = false } = Astro.props;
 
 const allImages = import.meta.glob<{ default: ImageMetadata }>(
   '/src/assets/img/**/*.{png,jpg,jpeg,webp,avif,gif}'
@@ -9,7 +9,7 @@ const imageKey = `/src/assets${img}`;
 const imageImport = allImages[imageKey];
 const resolvedImage = imageImport ? (await imageImport()).default : null;
 ---
-<a href={url} class="group block relative overflow-hidden bg-charcoal aspect-[4/5] md:aspect-[3/4]">
+<a href={url} class={`group block relative overflow-hidden bg-charcoal aspect-[4/5] md:aspect-[3/4] ${featured ? 'md:col-span-2 md:aspect-[2/1]' : ''}`}>
   {/* Image */}
   <div class="absolute inset-0 img-hover-zoom">
     {resolvedImage
@@ -35,7 +35,7 @@ const resolvedImage = imageImport ? (await imageImport()).default : null;
   </div>
 
   {/* Default Overlay */}
-  <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-100 transition-opacity duration-500"></div>
+  <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-100 transition-opacity duration-500"></div>
 
   {/* Content */}
   <div class="absolute bottom-0 left-0 right-0 p-6 md:p-8">
@@ -55,9 +55,5 @@ const resolvedImage = imageImport ? (await imageImport()).default : null;
   </div>
 
   {/* Hover Overlay */}
-  <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center pointer-events-none">
-    <span class="text-subtitle text-white tracking-widest border border-white/40 px-6 py-3">
-      View Project
-    </span>
-  </div>
+  <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
 </a>

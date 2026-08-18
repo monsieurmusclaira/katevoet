@@ -86,55 +86,27 @@ export const meta = {
 
 <section class="py-20 md:py-28 px-8 md:px-16 lg:px-24 bg-cream" data-aos="fade-up" data-aos-duration="600" >
     <div class="w-full max-w-6xl mx-auto flex flex-col items-center" >
-        <table class="table-auto border-separate border-spacing-x-3 text-charcoal">
-            <tbody>
-                <tr>
-                    <td class="text-right font-light">Director</td>
-                    <td class="text-left font-bold">Kate Voet</td>
-                </tr>
-                <tr>
-                    <td class="text-right font-light">Cast</td>
-                    <td class="text-left font-bold">Jan Bijvoet</td>
-                </tr>
-                <tr>
-                    <td class="text-right font-light"></td>
-                    <td class="text-left font-bold">Jill Verhaeghe</td>
-                </tr>
-                <tr>
-                    <td class="text-right font-light">Assistant Director</td>
-                    <td class="text-left font-bold">Elke Hertogs</td>
-                </tr>
-                <tr>
-                    <td class="text-right font-light">Cinematographer</td>
-                    <td class="text-left font-bold">Victor Maes</td>
-                </tr>
-                <tr>
-                    <td class="text-right font-light">1st Assistant Camera</td>
-                    <td class="text-left font-bold">Jan-Willem Rouwhorst</td>
-                </tr>
-                <tr>
-                    <td class="text-right font-light">Production Design</td>
-                    <td class="text-left font-bold">Pim Dinghs</td>
-                </tr>
-                <tr>
-                    <td class="text-right font-light"></td>
-                    <td class="text-left font-bold">Robin Hendrix</td>
-                </tr>
-                <tr>
-                    <td class="text-right font-light">Editing</td>
-                    <td class="text-left font-bold">Jerome Bartholomeus</td>
-                </tr>
-                <tr>
-                    <td class="text-right font-light">Sound Design & Composer</td>
-                    <td class="text-left font-bold">Senjan Jansen</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="mb-8">
+            <p class="text-caption text-warmgray mb-2">Film record</p>
+            <h2 class="text-2xl md:text-3xl text-charcoal">Credits</h2>
+        </div>
+        <div id="credits" class="w-full grid grid-cols-1 md:grid-cols-[minmax(0,10rem)_1fr] gap-x-6 gap-y-1 text-charcoal">
+            <CreditsItem crewfunction="Director" crewname="Kate Voet" />
+            <CreditsItem crewfunction="Cast" crewname="Jan Bijvoet" />
+            <CreditsItem crewfunction="" crewname="Jill Verhaeghe" />
+            <CreditsItem crewfunction="Assistant Director" crewname="Elke Hertogs" />
+            <CreditsItem crewfunction="Cinematographer" crewname="Victor Maes" />
+            <CreditsItem crewfunction="1st Assistant Camera" crewname="Jan-Willem Rouwhorst" />
+            <CreditsItem crewfunction="Production Design" crewname="Pim Dinghs" />
+            <CreditsItem crewfunction="" crewname="Robin Hendrix" />
+            <CreditsItem crewfunction="Editing" crewname="Jerome Bartholomeus" />
+            <CreditsItem crewfunction="Sound Design & Composer" crewname="Senjan Jansen" />
+        </div>
     </div>
 </section>
 
 <section class="py-20 md:py-28 px-8 md:px-16 lg:px-24 bg-cream" data-aos="fade-up" data-aos-duration="600">
-    <div id="awards" class="w-full max-w-6xl mx-auto grid grid-cols-2 gap-2 text-charcoal">
+    <div id="awards" class="w-full max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-[minmax(0,10rem)_1fr] gap-x-6 gap-y-1 text-charcoal">
         <FestivalsItem festivalname="Filmfestival Oostende 2017" heading="Awards & Festivals" />
         <FestivalsItem festivalname="Ciné Privé 2017" heading="" />
         <FestivalsItem festivalname="Black Canvas 2018" heading="" />
@@ -152,7 +124,7 @@ export const meta = {
 </section>
 
 <section class="py-20 md:py-28 px-8 md:px-16 lg:px-24 bg-cream">
-    <div class="w-full max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-3">
+    <div class="w-full max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
         <ContentPicture image="/img/leshomardsimmortels/stills/KateEditE26_AspectWrapper.01_00_50_17.Still097.png" alt={meta.imageAlt} />
         <ContentPicture image="/img/leshomardsimmortels/stills/KateEditE26_AspectWrapper.01_01_25_21.Still102.png" alt={meta.imageAlt} />
     </div>
@@ -162,11 +134,11 @@ export const meta = {
 
 
 <section class="py-20 md:py-28 px-8 md:px-16 lg:px-24 bg-cream" data-aos="fade-up" data-aos-duration="600">
-    <div class="w-full max-w-6xl mx-auto flex flex-wrap place-content-around">
+    <div class="w-full max-w-6xl mx-auto flex flex-wrap place-content-around gap-6 md:gap-8">
         <img src="/img/leshomardsimmortels/laurels/leshomardsimmortels_laurel_oostende2017.svg" alt="Festival Laurel Oostende 2017" width="192" height="108" loading="lazy" decoding="async" class="w-48" />
         <img src="/img/leshomardsimmortels/laurels/leshomardsimmortels_laurel_cineprive2017.svg" alt="Festival Laurel Cineprive 2017" width="192" height="108" loading="lazy" decoding="async" class="w-48" />
         <img src="/img/leshomardsimmortels/laurels/leshomardsimmortels_laurel_blackcanvas2018.svg" alt="Festival Laurel Black Canvas 2018" width="192" height="108" loading="lazy" decoding="async" class="w-48" />
-        <img src="/img/leshomardsimmortels/laurels/leshomardsimmortels_laurel_festivalcinelaorquidea2018.svg" alt="Festival Festival Cine Laorquidea 2018" width="192" height="108" loading="lazy" decoding="async" class="w-48" />
+        <img src="/img/leshomardsimmortels/laurels/leshomardsimmortels_laurel_festivalcinelaorquidea2018.svg" alt="Festival Cine La Orquídea 2018" width="192" height="108" loading="lazy" decoding="async" class="w-48" />
         <img src="/img/leshomardsimmortels/laurels/leshomardsimmortels_laurel_brusselsindependant2018.svg" alt="Festival Brussels Independent 2018" width="192" height="108" loading="lazy" decoding="async" class="w-48" />
         <img src="/img/leshomardsimmortels/laurels/leshomardsimmortels_laurel_escuelesdecine2018.svg" alt="Festival Laurel Escueles de Cine 2018"  width="192" height="108" loading="lazy" decoding="async" class="w-48" />
         <img src="/img/leshomardsimmortels/laurels/leshomardsimmortels_laurel_hongkongarthouse2018.svg" alt="Festival Laurel Hong Kong Arthouse 2018" width="192" height="108" loading="lazy" decoding="async" class="w-48" />
@@ -180,7 +152,7 @@ export const meta = {
 </section>
 
 <section class="py-20 md:py-28 px-8 md:px-16 lg:px-24 bg-cream">
-    <div class="w-full max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-3">
+    <div class="w-full max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
         <ContentPicture image="/img/leshomardsimmortels/stills/KateEditE26_AspectWrapper.01_04_14_03.Still113.png" alt={meta.imageAlt} />
         <ContentPicture image="/img/leshomardsimmortels/stills/KateEditE26_AspectWrapper.01_05_55_23.Still093.png" alt={meta.imageAlt} />
         <ContentPicture image="/img/leshomardsimmortels/stills/LesHomardsImmortels_KateVoet_Corestill.webp" alt={meta.imageAlt} />

@@ -9,15 +9,21 @@ const today = new Date();
       <p class="text-caption text-white/60">Director & Screenwriter</p>
     </div>
 
-    <div class="flex flex-col md:flex-row gap-6 md:gap-12">
-      <a href="/" class="text-subtitle text-white/50 hover:text-white transition-colors duration-300 link-underline">
+    <div class="flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
+      <a href="/" class="py-2 text-subtitle text-white/50 hover:text-white transition-colors duration-300 link-underline">
         Work
       </a>
-      <a href="/about/" class="text-subtitle text-white/50 hover:text-white transition-colors duration-300 link-underline">
+      <a href="/about/" class="py-2 text-subtitle text-white/50 hover:text-white transition-colors duration-300 link-underline">
         About
       </a>
-      <a href="mailto:hi@katevoet.com" class="text-subtitle text-white/50 hover:text-white transition-colors duration-300 link-underline">
-        Contact
+      <a href="mailto:hi@katevoet.com" class="py-2 text-body text-white/70 hover:text-white transition-colors duration-300 link-underline">
+        hi@katevoet.com
+      </a>
+      <a href="https://www.instagram.com/_katevoet/" target="_blank" rel="noopener noreferrer" class="py-2 text-subtitle text-white/50 hover:text-white transition-colors duration-300 link-underline">
+        Instagram
+      </a>
+      <a href="https://www.linkedin.com/in/kate-voet-78a448383/" target="_blank" rel="noopener noreferrer" class="py-2 text-subtitle text-white/50 hover:text-white transition-colors duration-300 link-underline">
+        LinkedIn
       </a>
     </div>
 
@@ -28,7 +34,7 @@ const today = new Date();
 </footer>
 
 <!-- Static builds freeze the year at build time; refresh it in the browser. -->
-<script is:inline>
+<script is:inline data-astro-rerun>
   var fy = document.getElementById('footer-year');
   if (fy) fy.textContent = new Date().getFullYear();
 </script>

@@ -64,7 +64,8 @@
 
     // Single delegated click listener — never accumulates
     document.addEventListener('click', (e) => {
-      const img = e.target.closest('img[data-lightbox]');
+      const target = e.target.closest('button[aria-label="Enlarge image"]');
+      const img = target?.querySelector('img[data-lightbox]') || e.target.closest('img[data-lightbox]');
       if (!img) return;
       e.preventDefault();
       const index = images.indexOf(img);
@@ -121,10 +122,12 @@
     }
 
     function updateButtons() {
-      prevBtn.style.opacity = currentIndex === 0 ? '0.2' : '';
-      prevBtn.style.pointerEvents = currentIndex === 0 ? 'none' : '';
-      nextBtn.style.opacity = currentIndex === images.length - 1 ? '0.2' : '';
-      nextBtn.style.pointerEvents = currentIndex === images.length - 1 ? 'none' : '';
+      const atStart = currentIndex === 0;
+      const atEnd = currentIndex === images.length - 1;
+      prevBtn.classList.toggle('opacity-30', atStart);
+      prevBtn.classList.toggle('pointer-events-none', atStart);
+      nextBtn.classList.toggle('opacity-30', atEnd);
+      nextBtn.classList.toggle('pointer-events-none', atEnd);
     }
 
     // Event listeners
