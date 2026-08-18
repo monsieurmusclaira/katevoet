@@ -9,7 +9,17 @@ const imageKey = `/src/assets${img}`;
 const imageImport = allImages[imageKey];
 const resolvedImage = imageImport ? (await imageImport()).default : null;
 ---
-<a href={url} class={`group block relative overflow-hidden bg-charcoal aspect-[4/5] md:aspect-[3/4] ${featured ? 'md:col-span-2 md:aspect-[2/1]' : ''}`}>
+<a
+  href={url}
+  class:list={[
+    'group block relative overflow-hidden bg-charcoal',
+    // Sources are 16:9 film stills — portrait crops discarded most of the
+    // frame and upscaled. These ratios stay close to native, so the browser
+    // never scales past the source. Only one md: aspect is emitted per card,
+    // since two equal-specificity rules would race in the cascade.
+    featured ? 'aspect-[3/2] md:col-span-2 md:aspect-[21/9]' : 'aspect-[3/2]',
+  ]}
+>
   {/* Image */}
   <div class="absolute inset-0 img-hover-zoom">
     {resolvedImage
@@ -19,8 +29,9 @@ const resolvedImage = imageImport ? (await imageImport()).default : null;
           fallbackFormat="webp"
           alt=""
           class="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105 group-hover:opacity-90"
-          widths={[400, 700, 1000]}
-          sizes="(min-width: 768px) 50vw, 100vw"
+          widths={featured ? [800, 1200, 1600, 2200] : [500, 800, 1100, 1600]}
+          sizes={featured ? '(min-width: 768px) 92vw, 100vw' : '(min-width: 768px) 46vw, 100vw'}
+          quality={80}
           loading="lazy"
           decoding="async"
         />

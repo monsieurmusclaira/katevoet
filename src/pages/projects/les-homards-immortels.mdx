@@ -46,7 +46,7 @@ schema:
           item: "https://katevoet.com/projects/les-homards-immortels/"
 ---
 import ProjectHero from '../../components/ProjectHero.astro';
-import CreditsItem from '../../components/CreditsItem.astro';
+import CreditGroup from '../../components/CreditGroup.astro';
 import FestivalsItem from '../../components/FestivalsItem.astro';
 import ContentPicture from '../../components/ContentPicture.astro';
 export const meta = {
@@ -80,17 +80,19 @@ export const meta = {
             <p class="text-caption text-warmgray mb-2">The team</p>
             <h2 class="text-2xl md:text-3xl text-charcoal">Credits</h2>
         </div>
-        <div id="credits" class="w-full grid grid-cols-1 md:grid-cols-[minmax(0,10rem)_1fr] gap-x-6 gap-y-1 text-charcoal">
-            <CreditsItem crewfunction="Director" crewname="Kate Voet" />
-            <CreditsItem crewfunction="Cast" crewname="Jan Bijvoet" />
-            <CreditsItem crewfunction="" crewname="Jill Verhaeghe" />
-            <CreditsItem crewfunction="Assistant Director" crewname="Elke Hertogs" />
-            <CreditsItem crewfunction="Cinematographer" crewname="Victor Maes" />
-            <CreditsItem crewfunction="1st Assistant Camera" crewname="Jan-Willem Rouwhorst" />
-            <CreditsItem crewfunction="Production Design" crewname="Pim Dinghs" />
-            <CreditsItem crewfunction="" crewname="Robin Hendrix" />
-            <CreditsItem crewfunction="Editing" crewname="Jerome Bartholomeus" />
-            <CreditsItem crewfunction="Sound Design & Composer" crewname="Senjan Jansen" />
+        <div id="credits" class="w-full">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10 mb-14">
+                <CreditGroup lead role="Director" names={['Kate Voet']} />
+                <CreditGroup lead role="Cast" names={['Jan Bijvoet', 'Jill Verhaeghe']} />
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-10">
+                <CreditGroup role="Assistant Director" names={['Elke Hertogs']} />
+                <CreditGroup role="Cinematographer" names={['Victor Maes']} />
+                <CreditGroup role="1st Assistant Camera" names={['Jan-Willem Rouwhorst']} />
+                <CreditGroup role="Production Design" names={['Pim Dinghs', 'Robin Hendrix']} />
+                <CreditGroup role="Editing" names={['Jerome Bartholomeus']} />
+                <CreditGroup role="Sound Design & Composer" names={['Senjan Jansen']} />
+            </div>
         </div>
     </div>
 </section>

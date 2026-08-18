@@ -49,7 +49,7 @@ schema:
           item: "https://katevoet.com/projects/the-tears-of-things/"
 ---
 import ProjectHero from '../../components/ProjectHero.astro';
-import CreditsItem from '../../components/CreditsItem.astro';
+import CreditGroup from '../../components/CreditGroup.astro';
 import FestivalsItem from '../../components/FestivalsItem.astro';
 import ContentPicture from '../../components/ContentPicture.astro';
 export const meta = {
@@ -75,63 +75,41 @@ export const meta = {
             <p class="text-caption text-warmgray mb-2">The team</p>
             <h2 class="text-2xl md:text-3xl text-charcoal">Credits</h2>
         </div>
-        <div id="credits" class="grid grid-cols-1 md:grid-cols-[minmax(0,10rem)_1fr] gap-x-6 gap-y-1 text-charcoal" data-aos="fade-up" data-aos-duration="600">
-        <CreditsItem crewfunction="Director" crewname="Kate Voet" />
-        <CreditsItem crewfunction="Cast" crewname="Lydia Injova" />
-        <CreditsItem crewfunction="" crewname="Jakub Kotynski" />
-        <CreditsItem crewfunction="Producer" crewname="Songs in the Dark" />
-        <CreditsItem crewfunction="Co-producer" crewname="Eyeworks" />
-        <CreditsItem crewfunction="" crewname="Peter Bouckaert" />
-        <CreditsItem crewfunction="Assistant Director" crewname="Jelle Maseman" />
-        <CreditsItem crewfunction="" crewname="Niko Himschoot" />
-        <CreditsItem crewfunction="Cinematographer" crewname="Victor Maes" />
-        <CreditsItem crewfunction="1st Assistant Camera" crewname="Jan-Willem Rouwhorst" />
-        <CreditsItem crewfunction="" crewname="Michiel Lateur" />
-        <CreditsItem crewfunction="2nd Assistant Camera" crewname="Aileen Vandenbroele" />
-        <CreditsItem crewfunction="" crewname="Anthony Veiten" />
-        <CreditsItem crewfunction="Gaffer" crewname="Dieter Roelens" />
-        <CreditsItem crewfunction="Electrician" crewname="Fenna Maas" />
-        <CreditsItem crewfunction="" crewname="Aaron Veys" />
-        <CreditsItem crewfunction="" crewname="Eva Somers" />
-        <CreditsItem crewfunction="" crewname="Gillis Kornelis" />
-        <CreditsItem crewfunction="" crewname="Dennis Kussener" />
-        <CreditsItem crewfunction="Key Grip" crewname="Jonas Glassee" />
-        <CreditsItem crewfunction="" crewname="Stijn Deprez" />
-        <CreditsItem crewfunction="Steadicam" crewname="Loic Dillen" />
-        <CreditsItem crewfunction="Art Director" crewname="Maud Gyssels" />
-        <CreditsItem crewfunction="Set Dresser" crewname="Robin Hendrix" />
-        <CreditsItem crewfunction="" crewname="Dries Vanoirbeek" />
-        <CreditsItem crewfunction="" crewname="Sophie May" />
-        <CreditsItem crewfunction="Make-up" crewname="Lena Dobbels" />
-        <CreditsItem crewfunction="" crewname="Marlies van Rompay" />
-        <CreditsItem crewfunction="Costume Design" crewname="Heide Winne" />
-        <CreditsItem crewfunction="Costumer" crewname="Fauve Ryckebusch" />
-        <CreditsItem crewfunction="" crewname="Catherine Bourda" />
-        <CreditsItem crewfunction="Script" crewname="Oscar Schutz" />
-        <CreditsItem crewfunction="Editing" crewname="Ewin Ryckaert" />
-        <CreditsItem crewfunction="Sound Recording" crewname="Yanna Soentjens" />
-        <CreditsItem crewfunction="Boom Operator" crewname="Vincent Somers" />
-        <CreditsItem crewfunction="Sound Design" crewname="Tijn Hazen" />
-        <CreditsItem crewfunction="Sound Effect Editor" crewname="Taco Drijfhout" />
-        <CreditsItem crewfunction="Dialogue Editor" crewname="Max van den Oever" />
-        <CreditsItem crewfunction="ADR" crewname="Fred de Geus" />
-        <CreditsItem crewfunction="Foley" crewname="Elias Vervecken" />
-        <CreditsItem crewfunction="" crewname="Stephane Werner" />
-        <CreditsItem crewfunction="Music" crewname="Senjan Jansen" />
-        <CreditsItem crewfunction="VFX" crewname="Elke Dhaese" />
-        <CreditsItem crewfunction="Title Design" crewname="Titles" />
-        <CreditsItem crewfunction="Location" crewname="Luna Marie Bogaert" />
-        <CreditsItem crewfunction="" crewname="Djurre van Dijck" />
-        <CreditsItem crewfunction="" crewname="Neil De Cock" />
-        <CreditsItem crewfunction="" crewname="Annabelle van Campenhout" />
-        <CreditsItem crewfunction="" crewname="Wout de Coster" />
-        <CreditsItem crewfunction="" crewname="Wim Geerts" />
-        <CreditsItem crewfunction="" crewname="Geert Maes" />
-        <CreditsItem crewfunction="" crewname="Lennert Lefevre" />
-        <CreditsItem crewfunction="" crewname="Ann Nooyens" />
-        <CreditsItem crewfunction="" crewname="Jente Pijpers" />
-        <CreditsItem crewfunction="" crewname="Nina van Belle" />
-        <CreditsItem crewfunction="" crewname="Lucas Gortemaker" />
+        <div id="credits" data-aos="fade-up" data-aos-duration="600">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10 mb-14">
+                <CreditGroup lead role="Director" names={['Kate Voet']} />
+                <CreditGroup lead role="Cast" names={['Lydia Injova', 'Jakub Kotynski']} />
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-10">
+                <CreditGroup role="Producer" names={['Songs in the Dark']} />
+                <CreditGroup role="Co-producer" names={['Eyeworks', 'Peter Bouckaert']} />
+                <CreditGroup role="Assistant Director" names={['Jelle Maseman', 'Niko Himschoot']} />
+                <CreditGroup role="Cinematographer" names={['Victor Maes']} />
+                <CreditGroup role="1st Assistant Camera" names={['Jan-Willem Rouwhorst', 'Michiel Lateur']} />
+                <CreditGroup role="2nd Assistant Camera" names={['Aileen Vandenbroele', 'Anthony Veiten']} />
+                <CreditGroup role="Gaffer" names={['Dieter Roelens']} />
+                <CreditGroup role="Electrician" names={['Fenna Maas', 'Aaron Veys', 'Eva Somers', 'Gillis Kornelis', 'Dennis Kussener']} />
+                <CreditGroup role="Key Grip" names={['Jonas Glassee', 'Stijn Deprez']} />
+                <CreditGroup role="Steadicam" names={['Loic Dillen']} />
+                <CreditGroup role="Art Director" names={['Maud Gyssels']} />
+                <CreditGroup role="Set Dresser" names={['Robin Hendrix', 'Dries Vanoirbeek', 'Sophie May']} />
+                <CreditGroup role="Make-up" names={['Lena Dobbels', 'Marlies van Rompay']} />
+                <CreditGroup role="Costume Design" names={['Heide Winne']} />
+                <CreditGroup role="Costumer" names={['Fauve Ryckebusch', 'Catherine Bourda']} />
+                <CreditGroup role="Script" names={['Oscar Schutz']} />
+                <CreditGroup role="Editing" names={['Ewin Ryckaert']} />
+                <CreditGroup role="Sound Recording" names={['Yanna Soentjens']} />
+                <CreditGroup role="Boom Operator" names={['Vincent Somers']} />
+                <CreditGroup role="Sound Design" names={['Tijn Hazen']} />
+                <CreditGroup role="Sound Effect Editor" names={['Taco Drijfhout']} />
+                <CreditGroup role="Dialogue Editor" names={['Max van den Oever']} />
+                <CreditGroup role="ADR" names={['Fred de Geus']} />
+                <CreditGroup role="Foley" names={['Elias Vervecken', 'Stephane Werner']} />
+                <CreditGroup role="Music" names={['Senjan Jansen']} />
+                <CreditGroup role="VFX" names={['Elke Dhaese']} />
+                <CreditGroup role="Title Design" names={['Titles']} />
+                <CreditGroup role="Location" names={['Luna Marie Bogaert', 'Djurre van Dijck', 'Neil De Cock', 'Annabelle van Campenhout', 'Wout de Coster', 'Wim Geerts', 'Geert Maes', 'Lennert Lefevre', 'Ann Nooyens', 'Jente Pijpers', 'Nina van Belle', 'Lucas Gortemaker']} />
+            </div>
         </div>
     </div>
 </section>

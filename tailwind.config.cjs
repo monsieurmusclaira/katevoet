@@ -5,6 +5,7 @@ module.exports = {
 		extend: {
 			fontFamily: {
 				montserrat: ['Montserrat', 'Helvetica', 'Arial', 'sans-serif'],
+				cormorant: ['Cormorant Garamond', 'Georgia', 'serif'],
 			},
 			colors: {
 				cream: '#faf8f5',

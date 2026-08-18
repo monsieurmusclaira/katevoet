@@ -1,0 +1,18 @@
+---
+// One role and its people, billing-block style: a quiet tracked caption over
+// names set in the display face. `lead` bumps the scale for Director/Cast.
+const { role, names = [], lead = false } = Astro.props;
+const nameList = Array.isArray(names) ? names : [names];
+---
+<div>
+  <p class="text-caption text-warmgray mb-3">{role}</p>
+  <ul
+    class:list={[
+      'font-cormorant font-light text-charcoal',
+      lead ? 'text-3xl md:text-4xl leading-tight' : 'text-xl md:text-2xl leading-snug',
+      nameList.length > 6 && 'sm:columns-2 sm:gap-x-8',
+    ]}
+  >
+    {nameList.map((name) => <li class="break-inside-avoid">{name}</li>)}
+  </ul>
+</div>

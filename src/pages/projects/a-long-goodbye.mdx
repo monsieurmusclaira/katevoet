@@ -72,7 +72,7 @@ schema:
           item: "https://katevoet.com/projects/a-long-goodbye/"
 ---
 import ProjectHero from '../../components/ProjectHero.astro';
-import CreditsItem from '../../components/CreditsItem.astro';
+import CreditGroup from '../../components/CreditGroup.astro';
 import FestivalsItem from '../../components/FestivalsItem.astro';
 import ContentPicture from '../../components/ContentPicture.astro';
 export const meta = {
@@ -98,31 +98,22 @@ export const meta = {
             <p class="text-caption text-warmgray mb-2">The team</p>
             <h2 class="text-2xl md:text-3xl text-charcoal">Credits</h2>
         </div>
-        <div id="credits" class="grid grid-cols-1 md:grid-cols-[minmax(0,10rem)_1fr] gap-x-6 gap-y-1 text-charcoal" data-aos="fade-up" data-aos-duration="600">
-        <CreditsItem crewfunction="Directors" crewname="Kate Voet" />
-        <CreditsItem crewfunction="" crewname="Victor Maes" />
-        <CreditsItem crewfunction="Cast" crewname="Elizabeth Counsel" />
-        <CreditsItem crewfunction="" crewname="Richard Wells" />
-        <CreditsItem crewfunction="" crewname="Marlies Heuer" />
-        <CreditsItem crewfunction="" crewname="Derek de Lint" />
-        <CreditsItem crewfunction="Composer" crewname="Joep Beving" />
-        <CreditsItem crewfunction="Art Director" crewname="Daniel Balage" />
-        <CreditsItem crewfunction="CG Supervisor" crewname="Gael Chaize" />
-        <CreditsItem crewfunction="Lead Developer" crewname="Polygoat" />
-        <CreditsItem crewfunction="" crewname="Frederik Smolders" />
-        <CreditsItem crewfunction="Sound Designers" crewname="Game Audio Squad" />
-        <CreditsItem crewfunction="" crewname="Niels van der Leest" />
-        <CreditsItem crewfunction="" crewname="Lars Tesselaar" />
-        <CreditsItem crewfunction="Additional 2D Animation" crewname="Pieter Vanluffelen" />
-        <CreditsItem crewfunction="" crewname="Mathieu Jadin" />
-        <CreditsItem crewfunction="" crewname="Tom Lemmens" />
-        <CreditsItem crewfunction="Producers Belgium" crewname="Cassette for Timescapes" />
-        <CreditsItem crewfunction="" crewname="An Oost" />
-        <CreditsItem crewfunction="" crewname="Emmy Oost" />
-        <CreditsItem crewfunction="Producers Netherlands" crewname="Valk Productions" />
-        <CreditsItem crewfunction="" crewname="Richard Valk" />
-        <CreditsItem crewfunction="Producers Luxembourg" crewname="Tarantula" />
-        <CreditsItem crewfunction="" crewname="Donato Rotunno" />
+        <div id="credits" data-aos="fade-up" data-aos-duration="600">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10 mb-14">
+                <CreditGroup lead role="Directors" names={['Kate Voet', 'Victor Maes']} />
+                <CreditGroup lead role="Cast" names={['Elizabeth Counsel', 'Richard Wells', 'Marlies Heuer', 'Derek de Lint']} />
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-10">
+                <CreditGroup role="Composer" names={['Joep Beving']} />
+                <CreditGroup role="Art Director" names={['Daniel Balage']} />
+                <CreditGroup role="CG Supervisor" names={['Gael Chaize']} />
+                <CreditGroup role="Lead Developer" names={['Polygoat', 'Frederik Smolders']} />
+                <CreditGroup role="Sound Designers" names={['Game Audio Squad', 'Niels van der Leest', 'Lars Tesselaar']} />
+                <CreditGroup role="Additional 2D Animation" names={['Pieter Vanluffelen', 'Mathieu Jadin', 'Tom Lemmens']} />
+                <CreditGroup role="Producers Belgium" names={['Cassette for Timescapes', 'An Oost', 'Emmy Oost']} />
+                <CreditGroup role="Producers Netherlands" names={['Valk Productions', 'Richard Valk']} />
+                <CreditGroup role="Producers Luxembourg" names={['Tarantula', 'Donato Rotunno']} />
+            </div>
         </div>
     </div>
 </section>
