@@ -60,7 +60,13 @@ const {
         }
 
         reveal();
-        document.addEventListener('astro:page-load', reveal);
+        document.addEventListener('astro:page-load', () => {
+          // ClientRouter replaces <html> attributes on every soft navigation,
+          // which strips the `.js` gate added by BaseHead — re-add it first so
+          // the reveal observer can keep working across pages.
+          document.documentElement.classList.add('js');
+          reveal();
+        });
       </script>
   </body>
 

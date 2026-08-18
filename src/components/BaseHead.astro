@@ -70,7 +70,11 @@ const personSchema = {
     addressLocality: 'Brussels',
     addressCountry: 'Belgium',
   },
-  alumniOf: ['University of Amsterdam', 'LUCA School of Arts', 'The New School'],
+  alumniOf: [
+    { '@type': 'CollegeOrUniversity', name: 'University of Amsterdam' },
+    { '@type': 'CollegeOrUniversity', name: 'LUCA School of Arts' },
+    { '@type': 'CollegeOrUniversity', name: 'The New School' },
+  ],
   knowsAbout: ['Film direction', 'Screenwriting', 'Interactive VR film'],
   award: [
     'Venice Immersive Achievement Prize',
@@ -102,7 +106,7 @@ const personSchema = {
 <!-- Above-the-fold fonts are self-hosted via @fontsource. -->
 <link rel="preload" as="font" type="font/woff2" crossorigin href={cormorantGaramond300} />
 <link rel="preload" as="font" type="font/woff2" crossorigin href={montserrat400} />
-<script is:inline>document.documentElement.classList.add('js');</script>
+<script is:inline data-astro-rerun>document.documentElement.classList.add('js');</script>
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>

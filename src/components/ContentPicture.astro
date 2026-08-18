@@ -10,8 +10,8 @@ const imageKey = `/src/assets${image}`;
 const imageImport = allImages[imageKey];
 const resolvedImage = imageImport ? (await imageImport()).default : null;
 ---
-<section class="overflow-hidden">
-  <button type="button" class="block w-full" aria-label="Enlarge image">
+<section class="overflow-hidden w-full">
+  <button type="button" class="block w-full" aria-label={`Enlarge image: ${alt}`}>
   {resolvedImage
     ? <Picture
         src={resolvedImage}

@@ -64,7 +64,7 @@
 
     // Single delegated click listener — never accumulates
     document.addEventListener('click', (e) => {
-      const target = e.target.closest('button[aria-label="Enlarge image"]');
+      const target = e.target.closest('button[aria-label^="Enlarge image"]');
       const img = target?.querySelector('img[data-lightbox]') || e.target.closest('img[data-lightbox]');
       if (!img) return;
       e.preventDefault();

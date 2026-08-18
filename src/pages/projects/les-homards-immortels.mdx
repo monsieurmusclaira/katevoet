@@ -2,7 +2,7 @@
 layout: "../../layouts/BaseLayout.astro"
 title: "Les Homards Immortels — Short Film by Kate Voet (2017)"
 image: "/img/leshomardsimmortels/stills/KateEditE26_AspectWrapper.01_11_04_09.Still191.png"
-description: "Les Homards Immortels (2017), a short film by Kate Voet. Two minds meet again after a separation, alone and in search of a connection. 12 festival awards."
+description: "Les Homards Immortels (2017), a short film by Kate Voet. Two minds meet again after a separation, alone and in search of a connection. Selected at 13 international festivals."
 schema:
   "@context": "https://schema.org"
   "@graph":
@@ -18,24 +18,18 @@ schema:
       director:
         "@id": "https://katevoet.com/#kate-voet"
       actor:
-        - name: "Jan Bijvoet"
-        - name: "Jill Verhaeghe"
-      musicBy: "Senjan Jansen"
-      editor: "Jerome Bartholomeus"
+        - "@type": "Person"
+          name: "Jan Bijvoet"
+        - "@type": "Person"
+          name: "Jill Verhaeghe"
+      musicBy:
+        "@type": "Person"
+        name: "Senjan Jansen"
+      editor:
+        "@type": "Person"
+        name: "Jerome Bartholomeus"
       award:
-        - "Filmfestival Oostende 2017"
-        - "Ciné Privé 2017"
-        - "Black Canvas 2018"
-        - "Festival Cine La Orquídea 2018"
-        - "Brussels Independent Film Festival 2018"
-        - "Festival Internacional de Escuelas de Cine 2018"
-        - "Hong Kong Arthouse Film Festival 2018"
-        - "Venice Film Week 2018"
-        - "Amsterdam Independent Film Festival 2018"
-        - "UITKORT"
-        - "Wunderground 2018"
         - "CUT:TO Gent 2018 (Best Cinematography)"
-        - "Reykjavík International Film Festival 2019"
       trailer:
         "@type": "VideoObject"
         name: "Les Homards Immortels trailer"
@@ -48,10 +42,6 @@ schema:
           item: "https://katevoet.com/"
         - "@type": "ListItem"
           position: 2
-          name: "Work"
-          item: "https://katevoet.com/"
-        - "@type": "ListItem"
-          position: 3
           name: "Les Homards Immortels"
           item: "https://katevoet.com/projects/les-homards-immortels/"
 ---
@@ -87,7 +77,7 @@ export const meta = {
 <section class="py-20 md:py-28 px-8 md:px-16 lg:px-24 bg-cream" data-aos="fade-up" data-aos-duration="600" >
     <div class="w-full max-w-6xl mx-auto flex flex-col items-center" >
         <div class="mb-8">
-            <p class="text-caption text-warmgray mb-2">Film record</p>
+            <p class="text-caption text-warmgray mb-2">The team</p>
             <h2 class="text-2xl md:text-3xl text-charcoal">Credits</h2>
         </div>
         <div id="credits" class="w-full grid grid-cols-1 md:grid-cols-[minmax(0,10rem)_1fr] gap-x-6 gap-y-1 text-charcoal">
@@ -107,7 +97,7 @@ export const meta = {
 
 <section class="py-20 md:py-28 px-8 md:px-16 lg:px-24 bg-cream" data-aos="fade-up" data-aos-duration="600">
     <div id="awards" class="w-full max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-[minmax(0,10rem)_1fr] gap-x-6 gap-y-1 text-charcoal">
-        <FestivalsItem festivalname="Filmfestival Oostende 2017" heading="Awards & Festivals" />
+        <FestivalsItem festivalname="Filmfestival Oostende 2017" heading="Awards & Festivals" eyebrow="Recognition" />
         <FestivalsItem festivalname="Ciné Privé 2017" heading="" />
         <FestivalsItem festivalname="Black Canvas 2018" heading="" />
         <FestivalsItem festivalname="Festival Cine La Orquídea 2018" heading="" />
