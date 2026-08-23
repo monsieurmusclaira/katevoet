@@ -1,6 +1,6 @@
 ---
 ---
-<header id="site-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+<header id="site-header" class="fixed top-0 left-0 right-0 z-50 bg-cream/90 backdrop-blur-sm transition-all duration-500">
   <div class="px-8 md:px-16 lg:px-24 py-6 flex items-center justify-between">
     <!-- Logo -->
     <a href="/" class="group">
@@ -10,30 +10,35 @@
     </a>
 
     <!-- Navigation -->
-    <nav class="hidden md:flex items-center gap-10">
+    <nav aria-label="Primary" class="hidden md:flex items-center gap-10">
       <a href="/" id="nav-work" class="text-subtitle text-charcoal/70 hover:opacity-100 transition-colors duration-500 link-underline">
         Work
       </a>
       <a href="/about/" id="nav-about" class="text-subtitle text-charcoal/70 hover:opacity-100 transition-colors duration-500 link-underline">
         About
       </a>
+      <a href="/about/#contact" id="nav-contact" class="text-subtitle text-charcoal/70 hover:opacity-100 transition-colors duration-500 link-underline">
+        Contact
+      </a>
     </nav>
 
     <!-- Mobile Menu Button -->
     <button id="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" class="md:hidden p-2 -m-2 text-charcoal/80 hover:text-charcoal transition-colors">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <path id="mobile-menu-icon-open" stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        <path id="mobile-menu-icon-close" class="hidden" stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6L6 18" />
       </svg>
     </button>
   </div>
 
   <!-- Mobile Menu -->
-  <div id="mobile-menu" class="hidden md:hidden bg-charcoal/95 backdrop-blur-sm">
+  <nav id="mobile-menu" aria-label="Primary" class="hidden md:hidden bg-charcoal/95 backdrop-blur-sm">
     <div class="px-8 py-8 flex flex-col gap-6">
       <a href="/" class="py-2 text-subtitle text-white/70 hover:text-white transition-colors">Work</a>
       <a href="/about/" class="py-2 text-subtitle text-white/70 hover:text-white transition-colors">About</a>
+      <a href="/about/#contact" class="py-2 text-subtitle text-white/70 hover:text-white transition-colors">Contact</a>
     </div>
-  </div>
+  </nav>
 </header>
 
 <script>
@@ -44,22 +49,25 @@
     const logo = document.getElementById('nav-logo');
     const navWork = document.getElementById('nav-work');
     const navAbout = document.getElementById('nav-about');
+    const navContact = document.getElementById('nav-contact');
     const mobileBtn = document.getElementById('mobile-menu-btn');
-    if (!header || !logo || !navWork || !navAbout || !mobileBtn) return;
+    if (!header || !logo || !navWork || !navAbout || !navContact || !mobileBtn) return;
     const lightClasses = ['text-white', 'text-white/70', 'text-white/80'];
     const darkClasses = ['text-charcoal', 'text-charcoal/70', 'text-charcoal/80'];
     const from = overHero ? darkClasses : lightClasses;
     const to = overHero ? lightClasses : darkClasses;
-    [logo, navWork, navAbout, mobileBtn].forEach((element, index) => {
-      element.classList.replace(from[index === 0 ? 0 : index === 3 ? 2 : 1], to[index === 0 ? 0 : index === 3 ? 2 : 1]);
+    [logo, navWork, navAbout, navContact, mobileBtn].forEach((element) => {
+      const index = element === logo ? 0 : element === mobileBtn ? 2 : 1;
+      element.classList.replace(from[index], to[index]);
     });
+    header.classList.remove('bg-cream/90', 'bg-cream/85');
     header.classList.toggle('bg-cream/85', !overHero);
     header.classList.toggle('backdrop-blur-sm', !overHero);
   }
 
   function updateActiveNav() {
     const path = window.location.pathname;
-    document.querySelectorAll('nav a, #mobile-menu a').forEach((link) => {
+    document.querySelectorAll('#site-header nav a').forEach((link) => {
       const href = link.getAttribute('href');
       const active = href === '/' ? path === '/' : path.startsWith(href || '');
       if (active) link.setAttribute('aria-current', 'page');
@@ -78,12 +86,21 @@
 
   // Per-page setup: apply the colour state and close any menu left open by the
   // previous page. The delegated toggle listener below is bound only once.
-  function closeMobileMenu() {
-    document.getElementById('mobile-menu')?.classList.add('hidden');
+  function setMobileMenuState(open: boolean) {
+    const menu = document.getElementById('mobile-menu');
     const btn = document.getElementById('mobile-menu-btn');
-    if (!btn) return;
-    btn.setAttribute('aria-expanded', 'false');
-    btn.setAttribute('aria-label', 'Open menu');
+    const openIcon = document.getElementById('mobile-menu-icon-open');
+    const closeIcon = document.getElementById('mobile-menu-icon-close');
+    if (!menu || !btn) return;
+    menu.classList.toggle('hidden', !open);
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    openIcon?.classList.toggle('hidden', open);
+    closeIcon?.classList.toggle('hidden', !open);
+  }
+
+  function closeMobileMenu() {
+    setMobileMenuState(false);
   }
 
   function initNav() {
@@ -98,9 +115,7 @@
     if (!btn) return;
     const menu = document.getElementById('mobile-menu');
     if (!menu) return;
-    const hidden = menu.classList.toggle('hidden');
-    btn.setAttribute('aria-expanded', String(!hidden));
-    btn.setAttribute('aria-label', hidden ? 'Open menu' : 'Close menu');
+    setMobileMenuState(menu.classList.contains('hidden'));
   });
 
   document.addEventListener('keydown', (e) => {

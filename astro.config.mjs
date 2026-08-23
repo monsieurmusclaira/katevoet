@@ -6,9 +6,6 @@ import mdx from "@astrojs/mdx";
 export default defineConfig({
   site: 'https://katevoet.com',
   trailingSlash: 'always',
-  integrations: [sitemap({ serialize(item) {
-    item.lastmod = new Date().toISOString();
-    return item;
-  } }), mdx()],
+  integrations: [sitemap(), mdx()],
   prefetch: true
 });

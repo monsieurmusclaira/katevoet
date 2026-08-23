@@ -2,38 +2,43 @@
 ---
 
 {/* Lightbox Overlay */}
-<div id="lightbox-overlay" transition:persist class="fixed inset-0 z-[100] bg-charcoal/95 opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center" role="dialog" aria-modal="true" aria-label="Image viewer" aria-hidden="true" inert>
+<div id="lightbox-overlay" transition:persist class="fixed inset-0 z-[100] bg-charcoal/95 opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center px-4 py-6" role="dialog" aria-modal="true" aria-labelledby="lightbox-title" aria-describedby="lightbox-description" aria-hidden="true" inert>
+  <h2 id="lightbox-title" class="sr-only">Image viewer</h2>
+  <p id="lightbox-description" class="sr-only">Use the left and right arrow keys to browse images, or press Escape to close.</p>
+  <p id="lightbox-status" class="sr-only" aria-live="polite" aria-atomic="true"></p>
   
   {/* Close button */}
   <button id="lightbox-close" class="absolute top-6 right-6 text-white/60 hover:text-white transition-colors duration-300 z-10 p-2" aria-label="Close">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
       <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
     </svg>
   </button>
 
   {/* Prev button */}
-  <button id="lightbox-prev" class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-white/90 hover:text-white transition-all duration-300 z-10 p-4 rounded-full bg-charcoal/60 backdrop-blur-sm" aria-label="Previous image">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 md:h-12 md:w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <button id="lightbox-prev" disabled class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-white/90 hover:text-white transition-all duration-300 z-10 p-4 rounded-full bg-charcoal/60 backdrop-blur-sm disabled:cursor-not-allowed" aria-label="Previous image" aria-disabled="true">
+    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 md:h-12 md:w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
       <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
     </svg>
   </button>
 
   {/* Next button */}
-  <button id="lightbox-next" class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-white/90 hover:text-white transition-all duration-300 z-10 p-4 rounded-full bg-charcoal/60 backdrop-blur-sm" aria-label="Next image">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 md:h-12 md:w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+  <button id="lightbox-next" disabled class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-white/90 hover:text-white transition-all duration-300 z-10 p-4 rounded-full bg-charcoal/60 backdrop-blur-sm disabled:cursor-not-allowed" aria-label="Next image" aria-disabled="true">
+    <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 md:h-12 md:w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
       <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
     </svg>
   </button>
 
   {/* Image container */}
-  <div class="relative max-w-[90vw] max-h-[85vh] flex items-center justify-center">
-    <img id="lightbox-image" src="" alt="" class="max-w-full max-h-[85vh] object-contain shadow-2xl" />
-  </div>
+  <div class="relative flex max-h-[90vh] max-w-[90vw] flex-col items-center justify-center gap-3">
+    <div class="relative flex min-h-0 max-h-[calc(85vh-5rem)] max-w-[90vw] items-center justify-center">
+      <img id="lightbox-image" src="" alt="" class="max-h-[calc(85vh-5rem)] max-w-full object-contain shadow-2xl" />
+    </div>
 
-  {/* Caption / Counter */}
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-center">
-    <p id="lightbox-caption" class="text-caption text-white/60"></p>
-    <p id="lightbox-counter" class="text-caption text-white/60 mt-1"></p>
+    {/* Caption / Counter */}
+    <div class="min-h-[2.5rem] max-w-[80vw] text-center">
+      <p id="lightbox-caption" class="text-caption break-words text-white/60"></p>
+      <p id="lightbox-counter" class="mt-1 text-caption text-white/60"></p>
+    </div>
   </div>
 </div>
 
@@ -43,6 +48,9 @@
     const img = document.getElementById('lightbox-image');
     const caption = document.getElementById('lightbox-caption');
     const counter = document.getElementById('lightbox-counter');
+    const title = document.getElementById('lightbox-title');
+    const description = document.getElementById('lightbox-description');
+    const status = document.getElementById('lightbox-status');
     const closeBtn = document.getElementById('lightbox-close');
     const prevBtn = document.getElementById('lightbox-prev');
     const nextBtn = document.getElementById('lightbox-next');
@@ -53,14 +61,13 @@
     let touchStartX = 0;
     let touchEndX = 0;
     let lastFocused = null;
+    let previousBodyOverflow = null;
 
-    // Refresh the images array and cursor styles (safe to call repeatedly)
+    // Refresh the images array and button state (safe to call repeatedly)
     function init() {
       currentIndex = 0;
       images = Array.from(document.querySelectorAll('img[data-lightbox]'));
-      images.forEach((image) => {
-        image.style.cursor = 'zoom-in';
-      });
+      updateButtons();
     }
 
     // Single delegated click listener — never accumulates
@@ -74,8 +81,9 @@
     });
 
     function open(index) {
-      if (images.length === 0) return;
+      if (images.length === 0 || !images[index]) return;
       lastFocused = document.activeElement;
+      if (!isOpen) previousBodyOverflow = document.body.style.overflow;
       currentIndex = index;
       isOpen = true;
       updateImage();
@@ -94,7 +102,10 @@
       overlay.classList.add('opacity-0', 'pointer-events-none');
       overlay.setAttribute('aria-hidden', 'true');
       overlay.setAttribute('inert', '');
-      document.body.style.overflow = '';
+      if (previousBodyOverflow !== null) {
+        document.body.style.overflow = previousBodyOverflow;
+        previousBodyOverflow = null;
+      }
       if (restoreFocus && lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
       lastFocused = null;
     }
@@ -106,6 +117,9 @@
       img.alt = currentImg.alt || '';
       caption.textContent = currentImg.alt || '';
       counter.textContent = `${currentIndex + 1} / ${images.length}`;
+      title.textContent = currentImg.alt || 'Image viewer';
+      description.textContent = `Image ${currentIndex + 1} of ${images.length}. Use the left and right arrow keys to browse images, or press Escape to close.`;
+      status.textContent = `${currentImg.alt ? `${currentImg.alt}. ` : ''}Image ${currentIndex + 1} of ${images.length}.`;
     }
 
     function prev() {
@@ -127,12 +141,14 @@
     function updateButtons() {
       const atStart = currentIndex === 0;
       const atEnd = currentIndex === images.length - 1;
-      prevBtn.classList.toggle('opacity-30', atStart);
-      prevBtn.classList.toggle('pointer-events-none', atStart);
-      prevBtn.setAttribute('aria-disabled', String(atStart));
-      nextBtn.classList.toggle('opacity-30', atEnd);
-      nextBtn.classList.toggle('pointer-events-none', atEnd);
-      nextBtn.setAttribute('aria-disabled', String(atEnd));
+      const previousDisabled = atStart || images.length === 0;
+      const nextDisabled = atEnd || images.length === 0;
+      prevBtn.disabled = previousDisabled;
+      nextBtn.disabled = nextDisabled;
+      prevBtn.classList.toggle('opacity-30', previousDisabled);
+      prevBtn.setAttribute('aria-disabled', String(previousDisabled));
+      nextBtn.classList.toggle('opacity-30', nextDisabled);
+      nextBtn.setAttribute('aria-disabled', String(nextDisabled));
     }
 
     // The overlay persists across view transitions, so it must be dismissed
@@ -166,7 +182,7 @@
           break;
         case 'Tab': {
           // Trap focus within the dialog's controls.
-          const focusable = [closeBtn, prevBtn, nextBtn];
+          const focusable = [closeBtn, prevBtn, nextBtn].filter((button) => !button.disabled);
           const idx = focusable.indexOf(document.activeElement);
           e.preventDefault();
           const dir = e.shiftKey ? -1 : 1;
